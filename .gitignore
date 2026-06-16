@@ -26,6 +26,10 @@ htmlcov/
 .vscode/
 .DS_Store
 
-# Data / logs
-data/
+# Data / logs (anchored to repo root so it doesn't match web/src/data)
+/data/
 *.log
+
+# Node / web app (the web/ marketing site has its own nested .gitignore too)
+node_modules/
+.next/

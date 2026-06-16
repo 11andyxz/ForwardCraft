@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0b0b0d"/>
+  <g stroke="#2a2a30" stroke-width="1">
+    <path d="M0 158 H1200 M0 316 H1200 M0 474 H1200 M200 0 V630 M400 0 V630 M600 0 V630 M800 0 V630 M1000 0 V630"/>
+  </g>
+  <g transform="translate(96,96)">
+    <rect width="64" height="64" rx="16" fill="#f7f7f5"/>
+    <path d="M18 22h28M18 32h20M18 42h28" stroke="#0b0b0d" stroke-width="4" stroke-linecap="round"/>
+    <path d="M44 28l7 7-7 7" stroke="#2347e5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <text x="84" y="44" fill="#f7f7f5" font-family="Arial, sans-serif" font-size="34" font-weight="600">ForwardCraft</text>
+  </g>
+  <text x="96" y="360" fill="#f7f7f5" font-family="Arial, sans-serif" font-size="72" font-weight="600">Enterprise AI,</text>
+  <text x="96" y="440" fill="#f7f7f5" font-family="Arial, sans-serif" font-size="72" font-weight="600">engineered into operations.</text>
+  <text x="96" y="520" fill="#a4a4ac" font-family="Arial, sans-serif" font-size="30">Custom AI agents · Workflow automation · Software integration</text>
+</svg>
