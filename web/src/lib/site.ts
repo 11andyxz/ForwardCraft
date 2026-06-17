@@ -6,7 +6,7 @@ import type { Metadata } from "next";
  */
 export const site = {
   name: "ForwardCraft",
-  legalName: "ForwardCraft Inc.",
+  legalName: "AndyXiongZheng LLC",
   tagline: "Enterprise AI, engineered into operations.",
   description:
     "ForwardCraft builds custom AI agents, workflow automation, and software integrations for the enterprise — production systems, not pilots.",

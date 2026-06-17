@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "ForwardCraft — Custom AI Agents · Workflow Automation · Software Integration"
 readme = "README.md"
 requires-python = ">=3.9"
-authors = [{ name = "11andyxz" }]
+authors = [{ name = "AndyXiongZheng LLC" }]
 keywords = ["ai-agents", "workflow-automation", "software-integration", "llm", "automation"]
 dependencies = []
 

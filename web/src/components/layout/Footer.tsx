@@ -95,7 +95,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col gap-4 text-sm text-ink-inverse-muted sm:flex-row sm:items-center sm:justify-between">
             <p>
-              © {year} {site.legalName} · A design-reference build with mock content.
+              © {year} AndyXiongZheng LLC. ForwardCraft is a business brand of AndyXiongZheng LLC.
             </p>
             <nav className="flex flex-wrap items-center gap-x-5 gap-y-2" aria-label="Legal">
               <Link href="/privacy" className="hover:text-ink-inverse">
