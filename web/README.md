@@ -3,6 +3,8 @@
 Enterprise AI-services marketing website for the **ForwardCraft** brand:
 **Custom AI agents · Workflow automation · Software integration.**
 
+**Live:** https://forwardcraft-web.vercel.app — auto-deployed from `web/` on every push to `main`.
+
 It is a complete, multi-page front end built with mock data. The information
 architecture and design language are modeled on an enterprise AI-services
 reference site, but **all brand assets, copy, logos, imagery, and data here are
