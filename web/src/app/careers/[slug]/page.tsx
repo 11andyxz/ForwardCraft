@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Briefcase, Building2, Check, MapPin, Users } from "lucide-react";
+import { Briefcase, Building2, Check, Clock, Laptop, MapPin } from "lucide-react";
 import type { Job } from "@/types";
 import { pageMetadata } from "@/lib/site";
 import { formatDate } from "@/lib/utils";
@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/animations/Reveal";
 import { JobCard } from "@/components/cards/JobCard";
 import { CTASection } from "@/components/sections/CTASection";
+import { JobApplicationForm } from "@/components/careers/JobApplicationForm";
 import { jobs, getJob } from "@/data/mock/jobs";
 
 export function generateStaticParams() {
@@ -64,11 +65,14 @@ export default async function JobDetailPage({
     ...jobs.filter((j) => j.slug !== job.slug && j.department !== job.department),
   ].slice(0, 3);
 
+  const workType = job.remote ? "Remote" : "On-site";
+
   const details: { label: string; value: string; icon: typeof MapPin }[] = [
     { label: "Location", value: job.location, icon: MapPin },
+    { label: "Work type", value: workType, icon: Laptop },
     { label: "Employment type", value: job.type, icon: Briefcase },
     { label: "Department", value: job.department, icon: Building2 },
-    { label: "Posted", value: formatDate(job.postedAt), icon: Users },
+    { label: "Posted", value: formatDate(job.postedAt), icon: Clock },
   ];
 
   return (
@@ -84,13 +88,13 @@ export default async function JobDetailPage({
         ]}
         actions={
           <>
-            <Button href="/contact" withArrow>
-              Apply now
+            <Button href="#apply" withArrow>
+              Apply for this job
             </Button>
             <div className="flex flex-wrap items-center gap-2">
               <Badge tone="outline">{job.type}</Badge>
               <Badge tone="neutral">{job.location}</Badge>
-              {job.remote ? <Badge tone="accent">Remote</Badge> : null}
+              <Badge tone={job.remote ? "accent" : "outline"}>{workType}</Badge>
             </div>
           </>
         }
@@ -122,14 +126,37 @@ export default async function JobDetailPage({
             </div>
 
             <Reveal>
-              <ListBlock heading="What you'll do" items={job.responsibilities} />
+              <ListBlock heading="Responsibilities" items={job.responsibilities} />
             </Reveal>
             <Reveal>
-              <ListBlock heading="What we're looking for" items={job.requirements} />
+              <ListBlock heading="Qualifications" items={job.requirements} />
             </Reveal>
             <Reveal>
-              <ListBlock heading="Nice to have" items={job.niceToHave} />
+              <ListBlock heading="Preferred qualifications" items={job.niceToHave} />
             </Reveal>
+
+            {job.compensation ? (
+              <Reveal>
+                <div className="flex flex-col gap-3">
+                  <h2 className="text-xl font-medium tracking-tight text-ink md:text-2xl">
+                    Compensation
+                  </h2>
+                  <p className="text-base leading-relaxed text-ink-muted">{job.compensation}</p>
+                </div>
+              </Reveal>
+            ) : null}
+
+            {job.benefits && job.benefits.length > 0 ? (
+              <Reveal>
+                <ListBlock heading="Benefits" items={job.benefits} />
+              </Reveal>
+            ) : null}
+
+            <div className="pt-2">
+              <Button href="#apply" withArrow>
+                Apply for this job
+              </Button>
+            </div>
           </div>
 
           {/* Sticky aside */}
@@ -159,22 +186,35 @@ export default async function JobDetailPage({
                 })}
               </dl>
 
-              <Button href="/contact" className="w-full" withArrow>
-                Apply now
+              <Button href="#apply" className="w-full" withArrow>
+                Apply for this job
               </Button>
-
-              <p className="rounded-md bg-paper px-3 py-2.5 text-xs leading-relaxed text-ink-subtle">
-                This is a sample listing on a demonstration site. The role and details are mock
-                content — applying takes you to our contact form.
-              </p>
             </div>
           </aside>
         </div>
       </Section>
 
+      {/* Application form */}
+      <Section tone="surface" ariaLabel="Application form">
+        <div
+          id="apply"
+          className="mx-auto max-w-3xl scroll-mt-24 rounded-xl border border-line bg-paper p-6 transition-shadow target:ring-2 target:ring-accent/70 target:ring-offset-4 target:ring-offset-surface md:p-10"
+        >
+          <div className="mx-auto mb-8 max-w-2xl">
+            <h2 className="text-2xl font-medium tracking-tight text-ink md:text-3xl">
+              Apply for this job
+            </h2>
+            <p className="mt-2 text-base text-ink-muted">
+              Applying for <span className="font-medium text-ink">{job.title}</span> · {job.location}
+            </p>
+          </div>
+          <JobApplicationForm job={{ id: job.id, slug: job.slug, title: job.title }} />
+        </div>
+      </Section>
+
       {/* More roles */}
       {moreRoles.length > 0 ? (
-        <Section tone="surface" ariaLabel="More open roles">
+        <Section tone="paper" ariaLabel="More open roles">
           <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
             <SectionHeading eyebrow="Keep exploring" title="More open roles" />
             <Button href="/careers" variant="secondary" withArrow>
@@ -192,11 +232,11 @@ export default async function JobDetailPage({
       ) : null}
 
       <CTASection
-        eyebrow="Apply"
-        title="Think you're a fit?"
-        description="We'd love to hear from you. Reach out and tell us why this role is the one — even if your background doesn't tick every box."
-        primary={{ label: "Apply now", href: "/contact" }}
-        secondary={{ label: "All open roles", href: "/careers" }}
+        eyebrow="Careers"
+        title="Don't see the right role?"
+        description="We're always interested in exceptional people. Explore every open role, or learn how we work before you apply."
+        primary={{ label: "All open roles", href: "/careers" }}
+        secondary={{ label: "How we work", href: "/how-we-work" }}
       />
     </>
   );

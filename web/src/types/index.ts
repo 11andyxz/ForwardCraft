@@ -211,6 +211,9 @@ export interface Job {
   responsibilities: string[];
   requirements: string[];
   niceToHave: string[];
+  /** Optional — rendered on the job page only when present. */
+  compensation?: string;
+  benefits?: string[];
 }
 
 export interface Office {

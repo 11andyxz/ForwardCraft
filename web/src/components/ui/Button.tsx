@@ -55,6 +55,15 @@ export function Button(props: ButtonAsLink | ButtonAsButton) {
         </a>
       );
     }
+    // In-page hash anchors render as plain <a> for native scroll + :target.
+    if (href.startsWith("#")) {
+      return (
+        <a href={href} className={classes} onClick={onClick}>
+          {children}
+          {arrow}
+        </a>
+      );
+    }
     return (
       <Link href={href} className={classes} onClick={onClick}>
         {children}

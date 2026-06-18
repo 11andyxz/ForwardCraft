@@ -33,3 +33,4 @@ htmlcov/
 # Node / web app (the web/ marketing site has its own nested .gitignore too)
 node_modules/
 .next/
+.vercel
