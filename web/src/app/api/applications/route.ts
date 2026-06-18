@@ -113,7 +113,12 @@ export async function POST(request: Request) {
   } catch (err) {
     console.error("Blob upload failed:", err);
     return NextResponse.json(
-      { ok: false, error: "We couldn't upload your file. Please try again." },
+      {
+        ok: false,
+        error: "We couldn't upload your file. Please try again.",
+        detail: err instanceof Error ? err.message : String(err),
+        tokenPresent: !!process.env.BLOB_READ_WRITE_TOKEN,
+      },
       { status: 502 },
     );
   }
@@ -149,7 +154,11 @@ export async function POST(request: Request) {
   } catch (err) {
     console.error("DB insert failed:", err);
     return NextResponse.json(
-      { ok: false, error: "We couldn't save your application. Please try again." },
+      {
+        ok: false,
+        error: "We couldn't save your application. Please try again.",
+        detail: err instanceof Error ? err.message : String(err),
+      },
       { status: 500 },
     );
   }
