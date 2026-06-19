@@ -99,13 +99,13 @@ export async function POST(request: Request) {
   try {
     const safeSlug = fields.jobSlug.replace(/[^a-z0-9-]/gi, "-");
     const r = await put(`applications/${safeSlug}/${id}/${resume!.name}`, resume!, {
-      access: "public",
+      access: "private",
       addRandomSuffix: true,
     });
     resumeUrl = r.url;
     if (coverFile) {
       const c = await put(`applications/${safeSlug}/${id}/cover-${coverFile.name}`, coverFile, {
-        access: "public",
+        access: "private",
         addRandomSuffix: true,
       });
       coverUrl = c.url;
@@ -113,12 +113,7 @@ export async function POST(request: Request) {
   } catch (err) {
     console.error("Blob upload failed:", err);
     return NextResponse.json(
-      {
-        ok: false,
-        error: "We couldn't upload your file. Please try again.",
-        detail: err instanceof Error ? err.message : String(err),
-        tokenPresent: !!process.env.BLOB_READ_WRITE_TOKEN,
-      },
+      { ok: false, error: "We couldn't upload your file. Please try again." },
       { status: 502 },
     );
   }
@@ -154,11 +149,7 @@ export async function POST(request: Request) {
   } catch (err) {
     console.error("DB insert failed:", err);
     return NextResponse.json(
-      {
-        ok: false,
-        error: "We couldn't save your application. Please try again.",
-        detail: err instanceof Error ? err.message : String(err),
-      },
+      { ok: false, error: "We couldn't save your application. Please try again." },
       { status: 500 },
     );
   }
