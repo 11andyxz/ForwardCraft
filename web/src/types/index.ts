@@ -212,6 +212,8 @@ export interface Job {
   requirements: string[];
   niceToHave: string[];
   /** Optional — rendered on the job page only when present. */
+  about?: string[];
+  deliverables?: string[];
   compensation?: string;
   benefits?: string[];
 }

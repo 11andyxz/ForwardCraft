@@ -109,19 +109,25 @@ export default async function JobDetailPage({
                 About the role
               </h2>
               <div className="flex flex-col gap-4 text-base leading-relaxed text-ink-muted">
-                <p>{job.summary}</p>
-                <p>
-                  As a {job.title} on our {job.department} team, you&apos;ll work alongside
-                  engineers, researchers, and domain experts to take AI from prototype to
-                  production inside regulated, high-stakes operations. You&apos;ll own outcomes end
-                  to end — scoping the problem, shipping a governed system, and instrumenting it so
-                  impact is measurable against a real baseline.
-                </p>
-                <p>
-                  This is a hands-on, high-ownership role for someone who wants their work to reach
-                  real users. You&apos;ll help raise the quality bar through evaluation, review, and
-                  clear written communication.
-                </p>
+                {job.about && job.about.length > 0 ? (
+                  job.about.map((para, i) => <p key={i}>{para}</p>)
+                ) : (
+                  <>
+                    <p>{job.summary}</p>
+                    <p>
+                      As a {job.title} on our {job.department} team, you&apos;ll work alongside
+                      engineers, researchers, and domain experts to take AI from prototype to
+                      production inside regulated, high-stakes operations. You&apos;ll own outcomes
+                      end to end — scoping the problem, shipping a governed system, and
+                      instrumenting it so impact is measurable against a real baseline.
+                    </p>
+                    <p>
+                      This is a hands-on, high-ownership role for someone who wants their work to
+                      reach real users. You&apos;ll help raise the quality bar through evaluation,
+                      review, and clear written communication.
+                    </p>
+                  </>
+                )}
               </div>
             </div>
 
@@ -149,6 +155,12 @@ export default async function JobDetailPage({
             {job.benefits && job.benefits.length > 0 ? (
               <Reveal>
                 <ListBlock heading="Benefits" items={job.benefits} />
+              </Reveal>
+            ) : null}
+
+            {job.deliverables && job.deliverables.length > 0 ? (
+              <Reveal>
+                <ListBlock heading="Expected deliverables" items={job.deliverables} />
               </Reveal>
             ) : null}
 

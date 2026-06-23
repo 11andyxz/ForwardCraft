@@ -30,7 +30,7 @@ const seeds: Seed[] = [
   { slug: "contract-vision-specialist", title: "Computer Vision Specialist (Contract)", department: "Delivery", location: "Remote — Global", type: "Contract", remote: true, postedAt: "2026-04-17", summary: "Deliver vision pipelines for inspection and assessment use cases." },
 ];
 
-export const jobs: Job[] = seeds.map((s) => ({
+const seededJobs: Job[] = seeds.map((s) => ({
   id: s.slug,
   slug: s.slug,
   title: s.title,
@@ -58,6 +58,63 @@ export const jobs: Job[] = seeds.map((s) => ({
     "Familiarity with evaluation and human-in-the-loop systems.",
   ],
 }));
+
+/**
+ * Fully-specified role (real content, not the shared template above).
+ * Location / employment type / department are defaults — adjust as needed.
+ */
+const technicalProductAnalyst: Job = {
+  id: "technical-product-analyst",
+  slug: "technical-product-analyst",
+  title: "Technical Product Analyst — AI & Market Intelligence Platform",
+  department: "Product",
+  location: "Remote — Americas",
+  type: "Full-time",
+  remote: true,
+  postedAt: "2026-06-23",
+  summary:
+    "Help build an AI-powered market intelligence platform — turning fragmented public and alternative data into structured datasets, AI research workflows, dashboards, and product-ready intelligence.",
+  about: [
+    "The Technical Product Analyst supports the development of an AI-powered market intelligence and data analytics platform — helping turn fragmented public data, alternative data, product information, digital activity, and market-related content into structured datasets, internal analytics, dashboard prototypes, AI-assisted research workflows, and product-ready intelligence outputs.",
+    "This is a full-cycle technical product role spanning product research, data source evaluation, data collection, data processing, analytics logic design, AI workflow testing, dashboard prototyping, documentation, and weekly product iteration. The role does not involve trade execution, portfolio management, investment advisory services, or handling client assets.",
+  ],
+  responsibilities: [
+    "Product research & intelligence system design — define use cases for the platform across public market information, alternative data, product/category trends, online activity, news/media content, and business intelligence signals.",
+    "Data source discovery & evaluation — identify, evaluate, and document APIs, public datasets, website data, product data, and social/media data that may support platform features.",
+    "Data collection & processing — build and maintain lightweight collection/processing workflows in Python, SQL, APIs, and automation; clean, validate, normalize, and organize data for analysis and product use.",
+    "AI-assisted analysis workflows — design and test workflows for information extraction, topic classification, summarization, sentiment analysis, entity tagging, market-brief generation, and QC of AI outputs.",
+    "Analytics logic & insight generation — develop frameworks that turn raw data into insights: trend monitoring, event tracking, category analysis, signal interpretation, and structured market-intelligence summaries.",
+    "Dashboard & product prototype development — support internal dashboards, front-end prototypes, reporting interfaces, and visualization tools that present data and insights in a product-ready format.",
+    "Technical documentation — document product requirements, data schemas, source assumptions, processing logic, AI workflow design, dashboard features, limitations, and future improvements.",
+    "Weekly product deliverables — submit weekly progress updates covering product research, code, data pipelines, dashboard improvements, AI workflow testing, documentation, and next steps.",
+    "Cross-functional product support — work with your supervisor to translate business needs into product requirements, technical tasks, prototype features, and measurable weekly deliverables.",
+  ],
+  requirements: [
+    "Bachelor's or Master's in a STEM field — Financial Engineering, Mathematics, Computer Science, Data Science, Statistics, Engineering, or a related quantitative discipline.",
+    "Experience with Python, SQL, data analysis, APIs, automation, or software/product development.",
+    "Strong quantitative, analytical, and technical problem-solving ability.",
+    "Ability to work across the full product lifecycle: research, data processing, product design, analytics, documentation, and iteration.",
+    "Ability to communicate technical progress clearly through written updates and documentation.",
+    "Interest in AI products, market intelligence systems, alternative data, business intelligence, and data-driven software platforms.",
+  ],
+  niceToHave: [
+    "Experience with financial data, market data, alternative data, product analytics, or digital platform analytics.",
+    "Experience with FastAPI, Flask, Streamlit, React, JavaScript, SQLite, PostgreSQL, or similar tools.",
+    "Familiarity with LLM applications, prompt testing, AI evaluation workflows, text classification, summarization, or automated reporting.",
+    "Prior experience in quantitative research, market risk analytics, dashboard development, data products, or technical product prototyping.",
+  ],
+  deliverables: [
+    "Product research notes and platform feature proposals.",
+    "Data source documentation and data-quality reviews.",
+    "Python scripts, SQL queries, API integrations, or automation tools.",
+    "Cleaned and structured datasets for internal use.",
+    "AI workflow testing notes, prompt evaluation results, or classification/summarization outputs.",
+    "Dashboard prototypes, reporting interfaces, or data visualization updates.",
+    "Weekly written summaries of completed work, technical challenges, supervisor feedback, and next-step plans.",
+  ],
+};
+
+export const jobs: Job[] = [technicalProductAnalyst, ...seededJobs];
 
 export const departments = Array.from(new Set(jobs.map((j) => j.department))).sort();
 export const jobLocations = Array.from(new Set(jobs.map((j) => j.location))).sort();
