@@ -7,10 +7,15 @@ import type {
 import { cn } from "@/lib/utils";
 
 const fieldBase =
-  "w-full rounded-md border bg-paper px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-subtle transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1";
+  "w-full rounded-md border bg-surface/60 px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-subtle shadow-[inset_0_1px_2px_rgba(24,23,18,0.04)] transition-[color,background-color,border-color,box-shadow] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus:bg-paper focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1";
 
 function controlClasses(error?: boolean) {
-  return cn(fieldBase, error ? "border-danger" : "border-line-strong hover:border-ink-subtle");
+  return cn(
+    fieldBase,
+    error
+      ? "border-danger bg-danger-soft/40 focus:bg-danger-soft/30"
+      : "border-line-strong hover:border-ink-subtle focus:border-accent",
+  );
 }
 
 interface LabelWrapProps {
@@ -24,14 +29,15 @@ interface LabelWrapProps {
 
 export function FieldWrap({ label, htmlFor, required, error, hint, children }: LabelWrapProps) {
   return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={htmlFor} className="text-sm font-medium text-ink">
+    <div className="flex flex-col gap-2">
+      <label htmlFor={htmlFor} className="text-sm font-medium tracking-[-0.01em] text-ink">
         {label}
-        {required ? <span className="text-danger"> *</span> : null}
+        {required ? <span className="text-accent"> *</span> : null}
       </label>
       {children}
       {error ? (
-        <p className="text-xs text-danger" role="alert">
+        <p className="flex items-center gap-1.5 font-mono text-2xs uppercase tracking-[0.08em] text-danger" role="alert">
+          <span aria-hidden className="inline-block size-1.5 rounded-full bg-danger" />
           {error}
         </p>
       ) : hint ? (
@@ -132,20 +138,24 @@ interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
 export function Checkbox({ label, error, id, name, ...rest }: CheckboxProps) {
   const fieldId = id ?? name ?? "checkbox";
   return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={fieldId} className="flex items-start gap-3 text-sm text-ink-muted">
+    <div className="flex flex-col gap-2">
+      <label
+        htmlFor={fieldId}
+        className="group flex items-start gap-3 text-sm text-ink-muted transition-colors duration-200 hover:text-ink"
+      >
         <input
           id={fieldId}
           name={name}
           type="checkbox"
           aria-invalid={!!error}
-          className="mt-0.5 size-4 shrink-0 rounded border-line-strong text-ink accent-ink"
+          className="mt-0.5 size-4 shrink-0 rounded-sm border-line-strong text-accent accent-accent transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-90"
           {...rest}
         />
         <span>{label}</span>
       </label>
       {error ? (
-        <p className="text-xs text-danger" role="alert">
+        <p className="flex items-center gap-1.5 font-mono text-2xs uppercase tracking-[0.08em] text-danger" role="alert">
+          <span aria-hidden className="inline-block size-1.5 rounded-full bg-danger" />
           {error}
         </p>
       ) : null}

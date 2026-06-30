@@ -35,9 +35,10 @@ export function PageHero({
 }: PageHeroProps) {
   const dark = tone === "dark";
   return (
-    <section className={cn("relative overflow-hidden border-b", dark ? "bg-night border-line-inverse" : "bg-paper border-line")}>
+    <section className={cn("relative overflow-hidden border-b", dark ? "grain bg-night border-line-inverse" : "bg-paper border-line")}>
+      {dark ? <div className="pointer-events-none absolute inset-0 ambient-accent" /> : null}
       <div className={cn("pointer-events-none absolute inset-0", dark ? "grid-lines-dark" : "grid-lines")} />
-      <Container className="relative py-16 md:py-24">
+      <Container className="relative z-10 py-16 md:py-24">
         <div className={cn("grid items-center gap-10", aside ? "lg:grid-cols-[1.2fr_1fr]" : "")}>
           <div className="flex flex-col gap-5">
             {breadcrumbs ? (
@@ -45,11 +46,11 @@ export function PageHero({
                 <ol className="flex flex-wrap items-center gap-1 text-xs">
                   {breadcrumbs.map((c, i) => (
                     <li key={c.href} className="flex items-center gap-1">
-                      {i > 0 ? <ChevronRight className={cn("size-3", dark ? "text-ink-inverse-muted" : "text-ink-subtle")} /> : null}
+                      {i > 0 ? <ChevronRight strokeWidth={2} className={cn("size-3", dark ? "text-ink-inverse-muted" : "text-ink-subtle")} /> : null}
                       <Link
                         href={c.href}
                         className={cn(
-                          "transition-colors",
+                          "rounded-sm font-mono text-2xs uppercase tracking-[0.1em] transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
                           dark ? "text-ink-inverse-muted hover:text-ink-inverse" : "text-ink-subtle hover:text-ink",
                         )}
                       >
@@ -66,7 +67,6 @@ export function PageHero({
             <Reveal as="div" delay={0.05}>
               <h1
                 className={cn(
-                  "font-medium tracking-tight",
                   size === "lg" ? "text-4xl md:text-6xl" : "text-3xl md:text-5xl",
                   dark ? "text-ink-inverse" : "text-ink",
                 )}

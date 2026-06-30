@@ -72,7 +72,7 @@ export function ResourceListing({ items, categories, showKind = false, featured 
   }
 
   const selectClasses =
-    "h-11 rounded-md border border-line-strong bg-paper px-3 text-sm text-ink hover:border-ink-subtle focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1";
+    "h-11 rounded-md border border-line-strong bg-paper px-3 text-sm text-ink shadow-sm transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-ink-subtle focus:border-accent focus:shadow-accent focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1";
 
   const allCategories = ["All", ...categories];
 
@@ -154,10 +154,10 @@ export function ResourceListing({ items, categories, showKind = false, featured 
                       resetToFirstPage();
                     }}
                     className={cn(
-                      "rounded-full border px-3.5 py-1.5 text-sm transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1",
+                      "rounded-full border px-3.5 py-1.5 text-sm transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1 active:translate-y-px",
                       active
-                        ? "border-ink bg-ink text-paper"
-                        : "border-line-strong text-ink-muted hover:border-ink-subtle hover:text-ink",
+                        ? "border-ink bg-ink text-paper shadow-sm"
+                        : "border-line-strong text-ink-muted hover:border-ink-subtle hover:bg-surface hover:text-ink",
                     )}
                   >
                     {c}
@@ -208,11 +208,14 @@ export function ResourceListing({ items, categories, showKind = false, featured 
 /** Large horizontal feature block built from an Article. */
 function FeaturedArticle({ article, showKind }: { article: Article; showKind: boolean }) {
   return (
-    <div className="overflow-hidden rounded-xl border border-line bg-paper">
+    <div className="group overflow-hidden rounded-2xl border border-line bg-surface shadow-sm transition-[transform,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:border-line-strong hover:shadow-md">
       <div className="grid items-stretch md:grid-cols-2">
-        <div className="order-1 md:order-2">
+        <div className="order-1 overflow-hidden md:order-2">
           <div className="h-56 w-full md:h-full md:min-h-[20rem]">
-            <CoverArt seed={article.slug} className="size-full" />
+            <CoverArt
+              seed={article.slug}
+              className="size-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+            />
           </div>
         </div>
         <div className="order-2 flex flex-col gap-4 p-6 md:order-1 md:p-10">
@@ -220,9 +223,9 @@ function FeaturedArticle({ article, showKind }: { article: Article; showKind: bo
             <Badge tone="neutral">{showKind ? kindLabel(article.kind) : article.category}</Badge>
             <span>{article.author}</span>
             <span aria-hidden>·</span>
-            <span>{article.readMinutes} min read</span>
+            <span className="font-mono nums-tabular">{article.readMinutes} min read</span>
           </div>
-          <h3 className="text-2xl font-medium leading-tight tracking-tight text-ink md:text-3xl">
+          <h3 className="text-2xl font-medium leading-tight tracking-tight text-ink transition-colors duration-200 group-hover:text-accent md:text-3xl">
             {article.title}
           </h3>
           <p className="text-base text-ink-muted">{article.excerpt}</p>

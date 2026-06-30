@@ -16,7 +16,7 @@ export function MetricsBand({ metrics, tone = "light", className }: MetricsBandP
   return (
     <div
       className={cn(
-        "grid gap-px overflow-hidden rounded-lg border",
+        "grid gap-px overflow-hidden rounded-xl border",
         dark ? "border-line-inverse bg-line-inverse" : "border-line bg-line",
         className,
       )}
@@ -26,18 +26,30 @@ export function MetricsBand({ metrics, tone = "light", className }: MetricsBandP
         <Reveal
           key={m.label}
           delay={i * 0.05}
-          className={cn("flex flex-col gap-1.5 p-6", dark ? "bg-night" : "bg-paper")}
+          className={cn(
+            "group relative flex flex-col gap-2 p-6 transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:p-7",
+            dark ? "bg-night hover:bg-night-2" : "bg-paper hover:bg-surface",
+          )}
         >
-          <span className={cn("text-3xl font-medium tracking-tight md:text-4xl", dark ? "text-ink-inverse" : "text-ink")}>
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-signal transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100"
+          />
+          <span
+            className={cn(
+              "nums-tabular font-mono text-3xl font-medium tracking-tight md:text-4xl",
+              dark ? "text-ink-inverse" : "text-ink",
+            )}
+          >
             {m.countTo !== undefined ? (
               <CountUp to={m.countTo} prefix={m.prefix} suffix={m.suffix} />
             ) : (
               m.value
             )}
           </span>
-          <span className={cn("text-sm", dark ? "text-ink-inverse-muted" : "text-ink-muted")}>{m.label}</span>
+          <span className={cn("text-sm font-medium", dark ? "text-ink-inverse-muted" : "text-ink-muted")}>{m.label}</span>
           {m.description ? (
-            <span className={cn("text-xs", dark ? "text-ink-inverse-muted" : "text-ink-subtle")}>{m.description}</span>
+            <span className={cn("text-xs leading-relaxed", dark ? "text-ink-inverse-muted" : "text-ink-subtle")}>{m.description}</span>
           ) : null}
         </Reveal>
       ))}

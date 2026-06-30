@@ -71,7 +71,7 @@ export function JobBrowser({ jobs, departments, locations }: JobBrowserProps) {
   return (
     <div className="flex flex-col gap-8">
       {/* Controls */}
-      <div className="flex flex-col gap-5 rounded-xl border border-line bg-surface p-5 md:p-6">
+      <div className="flex flex-col gap-5 rounded-2xl border border-line bg-surface p-5 shadow-sm md:p-6">
         <div className="grid gap-4 md:grid-cols-[1.4fr_1fr_1fr]">
           <div className="flex flex-col gap-1.5">
             <label htmlFor="job-search" className="text-sm font-medium text-ink">
@@ -102,14 +102,14 @@ export function JobBrowser({ jobs, departments, locations }: JobBrowserProps) {
 
         <div className="flex flex-col items-start justify-between gap-3 border-t border-line pt-4 sm:flex-row sm:items-center">
           <p className="text-sm text-ink-muted" aria-live="polite" aria-atomic="true">
-            <span className="font-medium text-ink">{filtered.length}</span>{" "}
+            <span className="font-mono font-medium text-ink nums-tabular">{filtered.length}</span>{" "}
             {filtered.length === 1 ? "open role" : "open roles"}
             {isFiltered ? " match your filters" : ""}
           </p>
-          <fieldset className="flex items-center gap-2">
+          <fieldset className="flex items-center gap-2.5">
             <legend className="sr-only">Sort roles</legend>
-            <span className="text-xs font-medium uppercase tracking-wide text-ink-subtle">Sort</span>
-            <div className="inline-flex overflow-hidden rounded-md border border-line-strong">
+            <span className="eyebrow">Sort</span>
+            <div className="inline-flex gap-0.5 rounded-lg border border-line-strong bg-paper p-0.5 shadow-sm">
               {(
                 [
                   { key: "newest", label: "Newest" },
@@ -122,10 +122,10 @@ export function JobBrowser({ jobs, departments, locations }: JobBrowserProps) {
                   onClick={() => setSort(option.key)}
                   aria-pressed={sort === option.key}
                   className={cn(
-                    "px-3.5 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent",
+                    "rounded-md px-3.5 py-1.5 text-sm font-medium transition-[color,background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-accent active:translate-y-px",
                     sort === option.key
-                      ? "bg-ink text-paper"
-                      : "bg-paper text-ink-muted hover:bg-surface-2",
+                      ? "bg-ink text-paper shadow-sm"
+                      : "text-ink-muted hover:bg-surface-2 hover:text-ink",
                   )}
                 >
                   {option.label}

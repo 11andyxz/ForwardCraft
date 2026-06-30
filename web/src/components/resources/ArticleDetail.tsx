@@ -73,9 +73,9 @@ export function ArticleDetail({ article, section }: ArticleDetailProps) {
               </>
             ) : null}
             <span aria-hidden>·</span>
-            <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
+            <time dateTime={article.publishedAt} className="font-mono nums-tabular">{formatDate(article.publishedAt)}</time>
             <span aria-hidden>·</span>
-            <span>{readingTime(wordCount(article))}</span>
+            <span className="font-mono nums-tabular">{readingTime(wordCount(article))}</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -101,7 +101,7 @@ export function ArticleDetail({ article, section }: ArticleDetailProps) {
               <ArticleToc items={toc} />
             </aside>
 
-            <div className="flex max-w-2xl flex-col gap-12">
+            <div className="flex max-w-[65ch] flex-col gap-14">
               {article.body.map((block, i) => (
                 <Reveal
                   as="section"
@@ -110,9 +110,9 @@ export function ArticleDetail({ article, section }: ArticleDetailProps) {
                   delay={i * 0.03}
                   className="scroll-mt-28 flex flex-col gap-4"
                 >
-                  <h2 className="text-2xl font-medium tracking-tight text-ink">{block.heading}</h2>
+                  <h2 className="text-3xl">{block.heading}</h2>
                   {block.paragraphs.map((p, j) => (
-                    <p key={j} className="text-base leading-relaxed text-ink-muted">
+                    <p key={j} className="text-lg leading-relaxed text-ink-muted">
                       {p}
                     </p>
                   ))}
@@ -125,7 +125,7 @@ export function ArticleDetail({ article, section }: ArticleDetailProps) {
                   {article.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-line-strong px-3 py-1 text-xs text-ink-muted"
+                      className="rounded-full border border-line-strong bg-surface px-3 py-1 font-mono text-xs text-ink-muted"
                     >
                       #{tag}
                     </span>
@@ -141,7 +141,7 @@ export function ArticleDetail({ article, section }: ArticleDetailProps) {
       <Section tone="surface" ariaLabel="Newsletter signup">
         <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 text-center">
           <span className="eyebrow">The Operating Layer</span>
-          <h2 className="text-2xl font-medium tracking-tight text-ink md:text-3xl">
+          <h2 className="text-3xl md:text-4xl">
             Get the next issue in your inbox
           </h2>
           <p className="max-w-xl text-base text-ink-muted">
@@ -180,7 +180,7 @@ function ShareButton({
       aria-label={label}
       title={label}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      className="inline-flex size-9 items-center justify-center rounded-md border border-line-strong text-ink-muted transition-colors hover:border-ink-subtle hover:text-ink focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1"
+      className="inline-flex size-9 items-center justify-center rounded-md border border-line-strong text-ink-muted transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-ink-subtle hover:bg-surface hover:text-ink active:translate-y-px focus:outline-none focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-offset-1"
     >
       {children}
     </a>

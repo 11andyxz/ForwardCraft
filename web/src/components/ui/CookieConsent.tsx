@@ -91,8 +91,8 @@ export function CookieConsent() {
             aria-label="Cookie consent"
           >
             <div className="container-page">
-              <div className="flex flex-col gap-4 rounded-lg border border-line bg-paper p-5 shadow-lg md:flex-row md:items-center md:justify-between">
-                <p className="max-w-2xl text-sm text-ink-muted">
+              <div className="flex flex-col gap-4 rounded-2xl border border-line-strong bg-paper/95 p-5 shadow-lg ring-1 ring-line backdrop-blur-sm md:flex-row md:items-center md:justify-between md:gap-8 md:p-6">
+                <p className="max-w-2xl text-sm leading-relaxed text-ink-muted">
                   We use cookies to run the site and understand how it&apos;s used. You can accept all,
                   reject non-essential, or set preferences. (This is a mock banner — no cookies are set.)
                 </p>
@@ -129,32 +129,32 @@ export function CookieConsent() {
             aria-modal="true"
             aria-label="Cookie preferences"
           >
-            <div className="absolute inset-0 bg-ink/40" onClick={() => setModalOpen(false)} />
+            <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={() => setModalOpen(false)} />
             <motion.div
               initial={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={reduce ? { opacity: 0 } : { opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.2 }}
-              className="relative z-10 w-full max-w-md rounded-xl border border-line bg-paper p-6 shadow-lg"
+              className="relative z-10 w-full max-w-md rounded-2xl border border-line-strong bg-paper p-6 shadow-lg ring-1 ring-line"
             >
-              <div className="mb-4 flex items-start justify-between">
+              <div className="mb-5 flex items-start justify-between gap-4">
                 <h2 className="text-xl font-medium text-ink">Cookie preferences</h2>
                 <button
                   onClick={() => setModalOpen(false)}
                   aria-label="Close"
-                  className="rounded-md p-1 text-ink-muted hover:bg-surface"
+                  className="-mr-1 -mt-1 rounded-md p-1.5 text-ink-muted transition-[color,background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-surface hover:text-ink active:scale-90"
                 >
-                  <X className="size-5" />
+                  <X className="size-5" strokeWidth={1.75} />
                 </button>
               </div>
-              <div className="flex flex-col divide-y divide-line">
+              <div className="flex flex-col divide-y divide-line rounded-lg border border-line bg-surface/40 px-4">
                 {[
                   { key: "necessary" as const, label: "Strictly necessary", desc: "Required for the site to function.", locked: true },
                   { key: "analytics" as const, label: "Analytics", desc: "Helps us understand usage.", locked: false },
                   { key: "marketing" as const, label: "Marketing", desc: "Used to personalize content.", locked: false },
                 ].map((row) => (
-                  <label key={row.key} className="flex items-start justify-between gap-4 py-3.5">
-                    <span className="flex flex-col">
+                  <label key={row.key} className="flex items-start justify-between gap-4 py-4">
+                    <span className="flex flex-col gap-0.5">
                       <span className="text-sm font-medium text-ink">{row.label}</span>
                       <span className="text-xs text-ink-muted">{row.desc}</span>
                     </span>
@@ -163,12 +163,12 @@ export function CookieConsent() {
                       checked={prefs[row.key]}
                       disabled={row.locked}
                       onChange={(e) => setPrefs((p) => ({ ...p, [row.key]: e.target.checked }))}
-                      className="mt-0.5 size-4 accent-ink disabled:opacity-50"
+                      className="mt-0.5 size-4 shrink-0 rounded-sm accent-accent transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] not-disabled:active:scale-90 disabled:opacity-50"
                     />
                   </label>
                 ))}
               </div>
-              <div className="mt-5 flex justify-end gap-2">
+              <div className="mt-6 flex justify-end gap-2">
                 <Button variant="secondary" size="sm" onClick={() => persist({ necessary: true, analytics: false, marketing: false })}>
                   Reject non-essential
                 </Button>

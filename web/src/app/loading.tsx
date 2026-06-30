@@ -7,28 +7,35 @@ export default function Loading() {
       <span className="sr-only">Loading</span>
 
       {/* Hero-area skeleton */}
-      <section className="border-b border-line bg-paper">
-        <div className="container-page py-16 md:py-24">
+      <section className="relative overflow-hidden border-b border-line bg-paper">
+        <div className="pointer-events-none absolute inset-0 grid-lines" aria-hidden="true" />
+        <div className="container-page relative py-20 md:py-28">
           <div className="flex max-w-2xl flex-col gap-5">
-            <Skeleton className="h-3 w-24" />
-            <Skeleton className="h-10 w-3/4" />
-            <Skeleton className="h-10 w-1/2" />
-            <Skeleton className="h-4 w-full" />
-            <Skeleton className="h-4 w-2/3" />
-            <div className="flex gap-3 pt-2">
-              <Skeleton className="h-11 w-36" />
-              <Skeleton className="h-11 w-32" />
+            <Skeleton className="h-5 w-28 rounded-md" />
+            <div className="flex flex-col gap-3 pt-1">
+              <Skeleton className="h-11 w-4/5 rounded-lg" />
+              <Skeleton className="h-11 w-1/2 rounded-lg" />
+            </div>
+            <div className="flex flex-col gap-2.5 pt-1">
+              <Skeleton className="h-4 w-full rounded-sm" />
+              <Skeleton className="h-4 w-2/3 rounded-sm" />
+            </div>
+            <div className="flex gap-3 pt-3">
+              <Skeleton className="h-11 w-36 rounded-md" />
+              <Skeleton className="h-11 w-32 rounded-md" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Content grid skeleton */}
-      <section className="bg-paper py-16 md:py-24">
+      <section className="bg-paper py-20 md:py-28">
         <div className="container-page">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
-              <CardSkeleton key={i} />
+              <div key={i} className={i === 0 ? "sm:col-span-2 lg:col-span-1" : undefined}>
+                <CardSkeleton />
+              </div>
             ))}
           </div>
         </div>

@@ -46,15 +46,31 @@ export function Accordion({ items, multiple = false, defaultOpen, className }: A
                 aria-expanded={isOpen}
                 aria-controls={`${baseId}-content-${item.id}`}
                 onClick={() => toggle(item.id)}
-                className="flex w-full items-center justify-between gap-4 py-5 text-left"
+                className="group/trigger -mx-4 flex w-[calc(100%+2rem)] items-center justify-between gap-4 rounded-lg px-4 py-5 text-left transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-surface active:scale-[0.997]"
               >
-                <span className="text-base font-medium text-ink">{item.trigger}</span>
-                <Plus
+                <span
                   className={cn(
-                    "size-5 shrink-0 text-ink-muted transition-transform duration-300",
-                    isOpen && "rotate-45",
+                    "text-base font-medium transition-colors duration-200",
+                    isOpen ? "text-ink" : "text-ink group-hover/trigger:text-accent",
                   )}
-                />
+                >
+                  {item.trigger}
+                </span>
+                <span
+                  className={cn(
+                    "flex size-7 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                    isOpen
+                      ? "border-transparent bg-accent text-paper"
+                      : "border-line-strong text-ink-muted group-hover/trigger:border-accent group-hover/trigger:text-accent",
+                  )}
+                >
+                  <Plus
+                    className={cn(
+                      "size-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                      isOpen && "rotate-45",
+                    )}
+                  />
+                </span>
               </button>
             </h3>
             <AnimatePresence initial={false}>

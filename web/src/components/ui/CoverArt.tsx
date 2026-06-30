@@ -27,10 +27,12 @@ export function CoverArt({ seed, className, tone = "light", accent = true }: Cov
   const variant = h % 5;
   const rng = (n: number) => (hash(seed + n) % 1000) / 1000;
 
-  const fg = tone === "dark" ? "#f7f7f5" : "#0a0a0b";
-  const bg = tone === "dark" ? "#141417" : "#f6f6f3";
-  const line = tone === "dark" ? "#2a2a30" : "#d3d3cd";
-  const accentColor = "#2347e5";
+  // Palette mapped to the design tokens (warm neutrals + ultramarine accent).
+  const fg = tone === "dark" ? "#f7f5ec" : "#181712";
+  const bg = tone === "dark" ? "#15140f" : "#f2f0e8";
+  const line = tone === "dark" ? "#322f24" : "#cfccbd";
+  const accentColor = "#2438c9";
+  const signalColor = "#cbdc4a";
 
   return (
     <div className={cn("relative overflow-hidden", className)} style={{ background: bg }} aria-hidden="true">
@@ -51,7 +53,7 @@ export function CoverArt({ seed, className, tone = "light", accent = true }: Cov
                 cx={60 + i * 55}
                 cy={125 + Math.sin(i + rng(i) * 3) * 50}
                 r={6 + rng(i) * 10}
-                fill="none"
+                fill={i === 4 && accent ? signalColor : "none"}
                 stroke={i === 2 && accent ? accentColor : fg}
                 strokeWidth="1.5"
                 opacity={0.5 + rng(i) * 0.4}
@@ -90,7 +92,14 @@ export function CoverArt({ seed, className, tone = "light", accent = true }: Cov
           <>
             {Array.from({ length: 5 }).map((_, i) =>
               Array.from({ length: 3 }).map((_, j) => (
-                <circle key={`${i}-${j}`} cx={80 + i * 60} cy={70 + j * 55} r="3.5" fill={fg} opacity="0.5" />
+                <circle
+                  key={`${i}-${j}`}
+                  cx={80 + i * 60}
+                  cy={70 + j * 55}
+                  r="3.5"
+                  fill={i === 2 && j === 1 && accent ? signalColor : fg}
+                  opacity={i === 2 && j === 1 && accent ? 0.9 : 0.5}
+                />
               )),
             )}
             <path d="M80 70 L140 125 L200 70 L260 180 L320 125" fill="none" stroke={accent ? accentColor : fg} strokeWidth="1.5" />

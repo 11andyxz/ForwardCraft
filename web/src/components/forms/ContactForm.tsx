@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { Check, Loader2 } from "lucide-react";
+import { AlertCircle, Check, Loader2 } from "lucide-react";
 import { Input, Textarea, Select, Checkbox } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
 
@@ -145,14 +145,14 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div
-        className="flex flex-col items-start gap-4 rounded-xl border border-success/30 bg-success-soft p-8"
+        className="flex flex-col items-start gap-5 rounded-2xl border border-success/25 bg-success-soft p-8 shadow-md sm:p-10"
         role="status"
       >
-        <span className="flex size-11 items-center justify-center rounded-full bg-paper text-success">
-          <Check className="size-6" />
+        <span className="flex size-12 items-center justify-center rounded-full bg-paper text-success shadow-sm ring-1 ring-success/20">
+          <Check className="size-6" strokeWidth={2.25} />
         </span>
-        <div className="flex flex-col gap-2">
-          <h3 className="text-xl font-medium text-ink">Thanks — your request is in.</h3>
+        <div className="flex flex-col gap-2.5">
+          <h3 className="text-xl text-ink">Thanks — your request is in.</h3>
           <p className="text-sm leading-relaxed text-ink-muted">
             A member of our team will be in touch within one business day to schedule your demo.
             In the meantime, keep an eye on your inbox for a confirmation. This is a mock form, so
@@ -172,10 +172,11 @@ export function ContactForm() {
     <form onSubmit={onSubmit} className="flex flex-col gap-5" noValidate>
       {banner ? (
         <div
-          className="rounded-md border border-danger/30 bg-danger-soft px-4 py-3 text-sm text-danger"
+          className="flex items-start gap-2.5 rounded-lg border border-danger/30 bg-danger-soft px-4 py-3.5 text-sm text-danger shadow-sm"
           role="alert"
         >
-          {banner}
+          <AlertCircle className="mt-0.5 size-4 shrink-0" strokeWidth={2.25} />
+          <span>{banner}</span>
         </div>
       ) : null}
 
@@ -292,7 +293,7 @@ export function ContactForm() {
         error={errors.consent}
       />
 
-      <div className="flex flex-col gap-3 pt-1">
+      <div className="flex flex-col gap-3 border-t border-line pt-5">
         <Button type="submit" size="lg" disabled={loading} className="w-full sm:w-auto">
           {loading ? (
             <>
@@ -302,7 +303,7 @@ export function ContactForm() {
             "Request a demo"
           )}
         </Button>
-        <p className="text-xs text-ink-subtle">
+        <p className="text-xs leading-relaxed text-ink-subtle">
           This is a demonstration form — submissions are simulated and no data leaves your browser.
         </p>
       </div>

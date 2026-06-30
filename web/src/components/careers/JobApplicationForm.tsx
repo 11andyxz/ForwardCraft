@@ -129,22 +129,24 @@ export function JobApplicationForm({ job }: { job: JobRef }) {
   if (success) {
     return (
       <div
-        className="mx-auto flex max-w-2xl flex-col items-center gap-5 rounded-xl border border-line bg-surface px-6 py-12 text-center"
+        className="mx-auto flex max-w-2xl flex-col items-center gap-6 rounded-2xl border border-line bg-surface px-6 py-14 text-center shadow-md"
         role="status"
       >
-        <CheckCircle2 className="size-12 text-success" />
+        <span className="flex size-16 items-center justify-center rounded-full bg-success-soft text-success ring-8 ring-success-soft/40">
+          <CheckCircle2 className="size-9" strokeWidth={1.75} />
+        </span>
         <h3 className="text-2xl font-medium tracking-tight text-ink">Application submitted</h3>
         <p className="max-w-md text-base leading-relaxed text-ink-muted">
           Thank you for applying to ForwardCraft. We&apos;ve received your application and will
           contact you if your experience matches the role.
         </p>
-        <dl className="flex w-full max-w-sm flex-col gap-2 rounded-lg border border-line bg-paper px-4 py-3 text-left text-sm">
-          <div className="flex items-center justify-between gap-4">
-            <dt className="text-ink-subtle">Role</dt>
+        <dl className="flex w-full max-w-sm flex-col gap-px overflow-hidden rounded-lg border border-line bg-line text-left text-sm">
+          <div className="flex items-center justify-between gap-4 bg-paper px-4 py-3">
+            <dt className="font-mono text-2xs uppercase tracking-[0.1em] text-ink-subtle">Role</dt>
             <dd className="text-right font-medium text-ink">{success.jobTitle}</dd>
           </div>
-          <div className="flex items-center justify-between gap-4">
-            <dt className="text-ink-subtle">Candidate email</dt>
+          <div className="flex items-center justify-between gap-4 bg-paper px-4 py-3">
+            <dt className="font-mono text-2xs uppercase tracking-[0.1em] text-ink-subtle">Candidate email</dt>
             <dd className="text-right font-medium text-ink">{success.email}</dd>
           </div>
         </dl>
@@ -163,7 +165,7 @@ export function JobApplicationForm({ job }: { job: JobRef }) {
   return (
     <form onSubmit={onSubmit} noValidate className="mx-auto flex max-w-2xl flex-col gap-5">
       {errors.form ? (
-        <p className="rounded-md border border-danger bg-danger-soft px-4 py-3 text-sm text-danger" role="alert">
+        <p className="rounded-lg border border-danger/30 bg-danger-soft px-4 py-3 text-sm text-danger shadow-sm" role="alert">
           {errors.form}
         </p>
       ) : null}
@@ -245,12 +247,12 @@ export function JobApplicationForm({ job }: { job: JobRef }) {
         hint="Anything else you'd like us to know (optional)." />
 
       {serverError ? (
-        <p className="rounded-md border border-danger bg-danger-soft px-4 py-3 text-sm text-danger" role="alert">
+        <p className="rounded-lg border border-danger/30 bg-danger-soft px-4 py-3 text-sm text-danger shadow-sm" role="alert">
           {serverError}
         </p>
       ) : null}
 
-      <div className="flex flex-col gap-3 pt-1">
+      <div className="flex flex-col gap-3 border-t border-line pt-6">
         <Button type="submit" size="lg" disabled={submitting} className="w-full sm:w-auto">
           {submitting ? (
             <>
@@ -260,7 +262,7 @@ export function JobApplicationForm({ job }: { job: JobRef }) {
             "Submit application"
           )}
         </Button>
-        <p className="text-xs text-ink-subtle">Fields marked with * are required.</p>
+        <p className="font-mono text-2xs uppercase tracking-[0.1em] text-ink-subtle">Fields marked with * are required.</p>
       </div>
     </form>
   );

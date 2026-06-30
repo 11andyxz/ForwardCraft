@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { ArrowRight, Check, Loader2 } from "lucide-react";
+import { AlertCircle, ArrowRight, Check, Loader2 } from "lucide-react";
 import { Input, Textarea, Select, Checkbox } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
 
@@ -104,15 +104,15 @@ export function PartnershipForm() {
   if (status === "success") {
     return (
       <div
-        className="flex flex-col items-start gap-4 rounded-lg border border-success/30 bg-success-soft p-8"
+        className="flex flex-col items-start gap-5 rounded-2xl border border-success/25 bg-success-soft p-8 shadow-md sm:p-10"
         role="status"
       >
-        <span className="flex size-10 items-center justify-center rounded-full bg-paper text-success ring-1 ring-success/30">
-          <Check className="size-5" />
+        <span className="flex size-11 items-center justify-center rounded-full bg-paper text-success shadow-sm ring-1 ring-success/20">
+          <Check className="size-5" strokeWidth={2.25} />
         </span>
-        <div className="flex flex-col gap-1.5">
-          <h3 className="text-lg font-medium text-ink">Inquiry received</h3>
-          <p className="max-w-md text-sm text-ink-muted">
+        <div className="flex flex-col gap-2">
+          <h3 className="text-lg text-ink">Inquiry received</h3>
+          <p className="max-w-md text-sm leading-relaxed text-ink-muted">
             Thanks{values.contact ? `, ${values.contact.split(" ")[0]}` : ""} — our partnerships
             team will review your interest in a {values.type || "partner"} relationship and reply
             within two business days.
@@ -121,9 +121,10 @@ export function PartnershipForm() {
         <button
           type="button"
           onClick={reset}
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors hover:text-ink"
+          className="group inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent-hover"
         >
-          Submit another inquiry <ArrowRight className="size-4" />
+          Submit another inquiry{" "}
+          <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
         </button>
       </div>
     );
@@ -135,10 +136,11 @@ export function PartnershipForm() {
     <form onSubmit={onSubmit} noValidate className="flex flex-col gap-5">
       {banner ? (
         <div
-          className="rounded-md border border-danger bg-danger-soft px-4 py-3 text-sm text-danger"
+          className="flex items-start gap-2.5 rounded-lg border border-danger/30 bg-danger-soft px-4 py-3.5 text-sm text-danger shadow-sm"
           role="alert"
         >
-          {banner}
+          <AlertCircle className="mt-0.5 size-4 shrink-0" strokeWidth={2.25} />
+          <span>{banner}</span>
         </div>
       ) : null}
 
@@ -216,7 +218,7 @@ export function PartnershipForm() {
         }
       />
 
-      <div className="flex items-center gap-4 pt-1">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-line pt-5">
         <Button type="submit" disabled={loading} withArrow={!loading}>
           {loading ? (
             <>

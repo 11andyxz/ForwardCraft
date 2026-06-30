@@ -18,8 +18,8 @@ export function RelatedGrid({
 }) {
   return (
     <Section tone={tone}>
-      <SectionHeading eyebrow={eyebrow} title={title} className="mb-10" />
-      <div className={columns === 3 ? "grid gap-6 md:grid-cols-2 lg:grid-cols-3" : "grid gap-6 md:grid-cols-2"}>
+      <SectionHeading eyebrow={eyebrow} title={title} className="mb-12" />
+      <div className={columns === 3 ? "grid gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3" : "grid gap-5 md:grid-cols-2 md:gap-6"}>
         {children}
       </div>
     </Section>

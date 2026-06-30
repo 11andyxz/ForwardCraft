@@ -7,13 +7,13 @@ type Variant = "primary" | "secondary" | "ghost" | "inverse";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 font-medium rounded-md transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap";
+  "inline-flex items-center justify-center gap-2 font-medium rounded-md transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-2 focus-visible:outline-offset-2 active:translate-y-px disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-ink text-paper hover:bg-night-3",
-  secondary: "border border-line-strong text-ink bg-paper hover:bg-surface",
+  primary: "bg-ink text-paper shadow-sm hover:bg-night-2 hover:shadow-md",
+  secondary: "border border-line-strong bg-paper text-ink hover:bg-surface hover:border-ink-subtle",
   ghost: "text-ink hover:bg-surface",
-  inverse: "bg-paper text-ink hover:bg-surface",
+  inverse: "bg-paper text-ink shadow-sm hover:bg-surface hover:shadow-md",
 };
 
 const sizes: Record<Size, string> = {

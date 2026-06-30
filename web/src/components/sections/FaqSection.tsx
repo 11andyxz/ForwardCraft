@@ -31,8 +31,10 @@ export function FaqSection({
 
   return (
     <Section tone={tone}>
-      <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr]">
-        <SectionHeading eyebrow={eyebrow} title={title} intro={intro} />
+      <div className="grid gap-10 lg:grid-cols-[0.85fr_1.4fr] lg:gap-16">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <SectionHeading eyebrow={eyebrow} title={title} intro={intro} />
+        </div>
         <Accordion
           items={faqs.map((f) => ({ id: f.id, trigger: f.question, content: f.answer }))}
           defaultOpen={faqs[0]?.id}

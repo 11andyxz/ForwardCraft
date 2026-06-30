@@ -56,13 +56,29 @@ export function MockLogo({ name, seed, className, markOnly = false }: MockLogoPr
   );
 
   if (markOnly) {
-    return <span className={cn("text-ink-subtle", className)}>{mark}</span>;
+    return (
+      <span
+        className={cn(
+          "text-ink-subtle transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent",
+          className,
+        )}
+      >
+        {mark}
+      </span>
+    );
   }
 
   return (
-    <span className={cn("inline-flex items-center gap-2 text-ink-subtle", className)}>
+    <span
+      className={cn(
+        "group inline-flex items-center gap-2.5 text-ink-subtle transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-ink",
+        className,
+      )}
+    >
       {mark}
-      <span className="font-mono text-sm font-medium tracking-tight whitespace-nowrap">{name}</span>
+      <span className="font-mono text-sm font-medium tracking-tight whitespace-nowrap transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:text-ink">
+        {name}
+      </span>
     </span>
   );
 }

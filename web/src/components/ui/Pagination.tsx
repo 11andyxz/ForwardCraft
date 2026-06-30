@@ -23,12 +23,12 @@ export function Pagination({ page, pageCount, onPageChange }: PaginationProps) {
   }
 
   const btn =
-    "inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm transition-colors";
+    "inline-flex h-9 min-w-9 items-center justify-center rounded-md px-2 text-sm nums-tabular transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:translate-y-px";
 
   return (
     <nav className="flex items-center justify-center gap-1" aria-label="Pagination">
       <button
-        className={cn(btn, "text-ink-muted hover:bg-surface disabled:opacity-40 disabled:hover:bg-transparent")}
+        className={cn(btn, "border border-line-strong text-ink-muted hover:border-ink-subtle hover:bg-surface hover:text-ink disabled:opacity-40 disabled:hover:border-line-strong disabled:hover:bg-transparent disabled:hover:text-ink-muted disabled:active:translate-y-0")}
         onClick={() => onPageChange(page - 1)}
         disabled={page === 1}
         aria-label="Previous page"
@@ -47,7 +47,9 @@ export function Pagination({ page, pageCount, onPageChange }: PaginationProps) {
             aria-current={p === page ? "page" : undefined}
             className={cn(
               btn,
-              p === page ? "bg-ink text-paper" : "text-ink-muted hover:bg-surface",
+              p === page
+                ? "bg-accent text-paper shadow-sm hover:bg-accent-hover"
+                : "text-ink-muted hover:bg-surface hover:text-ink",
             )}
           >
             {p}
@@ -55,7 +57,7 @@ export function Pagination({ page, pageCount, onPageChange }: PaginationProps) {
         ),
       )}
       <button
-        className={cn(btn, "text-ink-muted hover:bg-surface disabled:opacity-40 disabled:hover:bg-transparent")}
+        className={cn(btn, "border border-line-strong text-ink-muted hover:border-ink-subtle hover:bg-surface hover:text-ink disabled:opacity-40 disabled:hover:border-line-strong disabled:hover:bg-transparent disabled:hover:text-ink-muted disabled:active:translate-y-0")}
         onClick={() => onPageChange(page + 1)}
         disabled={page === pageCount}
         aria-label="Next page"

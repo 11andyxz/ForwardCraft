@@ -19,11 +19,12 @@ export function CTASection({
   secondary = { label: "See how we work", href: "/how-we-work" },
 }: CTASectionProps) {
   return (
-    <Section tone="dark" size="lg" className="relative overflow-hidden">
+    <Section tone="dark" size="lg" className="grain relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 ambient-accent" />
       <div className="pointer-events-none absolute inset-0 grid-lines-dark" />
-      <Reveal className="relative mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+      <Reveal className="relative z-10 mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
         <span className="eyebrow text-ink-inverse-muted">{eyebrow}</span>
-        <h2 className="text-3xl font-medium tracking-tight text-ink-inverse md:text-5xl">{title}</h2>
+        <h2 className="text-3xl text-ink-inverse md:text-5xl">{title}</h2>
         <p className="max-w-xl text-lg text-ink-inverse-muted">{description}</p>
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <Button href={primary.href} variant="inverse" size="lg" withArrow>
@@ -33,7 +34,7 @@ export function CTASection({
             <Button
               href={secondary.href}
               size="lg"
-              className="border border-line-inverse bg-transparent text-ink-inverse hover:bg-night-2"
+              className="border border-line-inverse bg-transparent text-ink-inverse hover:border-ink-inverse-muted hover:bg-night-2"
             >
               {secondary.label}
             </Button>

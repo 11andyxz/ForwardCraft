@@ -49,7 +49,7 @@ export function ArticleToc({ items }: { items: TocItem[] }) {
                 href={`#${item.id}`}
                 aria-current={active ? "true" : undefined}
                 className={cn(
-                  "-ml-px block border-l-2 py-1.5 pl-4 text-sm transition-colors",
+                  "-ml-px block border-l-2 py-1.5 pl-4 text-sm transition-[color,border-color] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
                   active
                     ? "border-accent font-medium text-ink"
                     : "border-transparent text-ink-muted hover:border-line-strong hover:text-ink",

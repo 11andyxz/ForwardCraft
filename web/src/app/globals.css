@@ -2,40 +2,43 @@
 
 /* ============================================================
    ForwardCraft — Design Tokens (Tailwind v4 @theme)
-   Enterprise / restrained / AI-infrastructure. Mono + grey base,
-   single cobalt accent, strong typography, clear grid.
+   v2 "Refined": warm-neutral editorial-enterprise. Bone paper,
+   warm near-black ink, a single deep ultramarine accent, a citron
+   data-signal, and an editorial serif display paired with Geist.
+   Token NAMES are stable — only values evolve, so every component
+   restyles for free.
    ============================================================ */
 
 @theme {
-  /* Neutrals (ink = text, paper = light surfaces) */
-  --color-ink: #0a0a0b;
-  --color-ink-muted: #56565d;
-  --color-ink-subtle: #8a8a92;
-  --color-paper: #ffffff;
-  --color-surface: #f6f6f3;
-  --color-surface-2: #eeeeea;
-  --color-line: #e5e5e1;
-  --color-line-strong: #d3d3cd;
+  /* Neutrals — warm-tinted (ink = text, paper = light surfaces) */
+  --color-ink: #181712;
+  --color-ink-muted: #5b574d;
+  --color-ink-subtle: #8c8779;
+  --color-paper: #faf9f5;
+  --color-surface: #f2f0e8;
+  --color-surface-2: #e8e6da;
+  --color-line: #e4e1d5;
+  --color-line-strong: #cfccbd;
 
-  /* Dark surfaces (used for hero/CTA/footer bands) */
-  --color-night: #0b0b0d;
-  --color-night-2: #141417;
-  --color-night-3: #1d1d21;
-  --color-ink-inverse: #f7f7f5;
-  --color-ink-inverse-muted: #a4a4ac;
-  --color-line-inverse: #2a2a30;
+  /* Dark surfaces (used for hero/CTA/footer bands) — warm charcoal */
+  --color-night: #15140f;
+  --color-night-2: #1e1c15;
+  --color-night-3: #29261d;
+  --color-ink-inverse: #f7f5ec;
+  --color-ink-inverse-muted: #a8a394;
+  --color-line-inverse: #322f24;
 
-  /* Accent — used sparingly */
-  --color-accent: #2347e5;
-  --color-accent-hover: #1a37bd;
-  --color-accent-soft: #eaeefb;
-  --color-signal: #c7f94b; /* data-viz / micro highlights only */
+  /* Accent — deep ultramarine, used sparingly */
+  --color-accent: #2438c9;
+  --color-accent-hover: #1a2a9c;
+  --color-accent-soft: #eaecf8;
+  --color-signal: #cbdc4a; /* data-viz / micro highlights only */
 
   /* Status */
-  --color-success: #167a4d;
-  --color-success-soft: #e6f4ec;
-  --color-danger: #c23b32;
-  --color-danger-soft: #fbeae8;
+  --color-success: #197a4c;
+  --color-success-soft: #e6f3eb;
+  --color-danger: #be3a30;
+  --color-danger-soft: #fae9e6;
 
   /* Typography */
   --font-sans:
@@ -43,6 +46,8 @@
     Roboto, Helvetica, Arial, sans-serif;
   --font-mono:
     var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-display:
+    var(--font-fraunces), Georgia, "Times New Roman", Cambria, serif;
 
   --text-2xs: 0.6875rem; /* 11px — eyebrows */
   --text-2xs--line-height: 1rem;
@@ -55,20 +60,22 @@
   --text-2xl: 1.75rem;
   --text-3xl: 2.25rem;
   --text-4xl: 3rem;
-  --text-5xl: 3.75rem;
-  --text-6xl: 4.75rem;
-  --text-7xl: 6rem;
+  --text-5xl: 3.85rem;
+  --text-6xl: 4.9rem;
+  --text-7xl: 6.25rem;
 
-  /* Radius — restrained */
+  /* Radius — restrained, varied at usage sites */
   --radius-sm: 4px;
   --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 18px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-2xl: 28px;
 
-  /* Shadows — subtle, no glow */
-  --shadow-sm: 0 1px 2px rgba(10, 10, 11, 0.05);
-  --shadow-md: 0 6px 24px -10px rgba(10, 10, 11, 0.18);
-  --shadow-lg: 0 24px 60px -28px rgba(10, 10, 11, 0.28);
+  /* Shadows — warm-tinted (hue of the ink, not pure black), softer */
+  --shadow-sm: 0 1px 2px rgba(24, 23, 18, 0.06);
+  --shadow-md: 0 8px 30px -14px rgba(24, 23, 18, 0.18);
+  --shadow-lg: 0 30px 70px -32px rgba(24, 23, 18, 0.3);
+  --shadow-accent: 0 14px 34px -16px rgba(36, 56, 201, 0.5);
 
   /* Layout */
   --container-page: 80rem; /* 1280px content max */
@@ -97,12 +104,30 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3, h4, h5 {
-    font-weight: 560;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+  /* Display headings (h1/h2) — editorial serif. Sub-headings (h3–h5)
+     stay on the grotesque for clean UI labelling. */
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 480;
+    letter-spacing: -0.018em;
+    line-height: 1.04;
     color: var(--color-ink);
     text-wrap: balance;
+    font-optical-sizing: auto;
+  }
+  h3,
+  h4,
+  h5 {
+    font-family: var(--font-sans);
+    font-weight: 560;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
   }
   ::selection {
     background: var(--color-ink);
@@ -138,10 +163,21 @@
     }
   }
 
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+  }
+
+  /* Tabular figures for metrics / data-dense numbers */
+  .nums-tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
   .eyebrow {
     font-family: var(--font-mono);
     font-size: var(--text-2xs);
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--color-ink-muted);
     font-weight: 500;
@@ -165,6 +201,27 @@
     mask-image: radial-gradient(ellipse 90% 80% at 50% 0%, #000 40%, transparent 100%);
   }
 
+  /* Subtle film grain — break digital flatness on hero/CTA/dark bands.
+     Opt-in: add to a relatively-positioned element. */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+    mix-blend-mode: soft-light;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 160px 160px;
+  }
+
+  /* Soft ambient radial glow for dark bands (tinted, low intensity) */
+  .ambient-accent {
+    background:
+      radial-gradient(60% 50% at 18% 0%, rgba(36, 56, 201, 0.16), transparent 70%),
+      radial-gradient(50% 60% at 100% 100%, rgba(203, 220, 74, 0.07), transparent 70%);
+  }
+
   /* Marquee */
   .marquee-track {
     animation: fc-marquee 32s linear infinite;
@@ -182,6 +239,12 @@
 @keyframes fc-fade-up {
   from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Skeleton shimmer — sweeps the light band across the gradient */
+@keyframes fc-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
 }
 
 /* Hide scrollbars for horizontal-scroll rails */

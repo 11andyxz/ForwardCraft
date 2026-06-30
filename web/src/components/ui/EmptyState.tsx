@@ -14,9 +14,9 @@ export function EmptyState({
   action,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-line-strong px-6 py-20 text-center">
-      <div className="flex size-12 items-center justify-center rounded-full bg-surface text-ink-subtle">
-        <SearchX className="size-6" />
+    <div className="flex flex-col items-center justify-center gap-4 rounded-xl border border-dashed border-line-strong bg-surface/40 px-6 py-20 text-center">
+      <div className="flex size-14 items-center justify-center rounded-2xl bg-accent-soft text-accent shadow-sm ring-1 ring-line">
+        <SearchX className="size-6" strokeWidth={1.75} />
       </div>
       <h3 className="text-lg font-medium text-ink">{title}</h3>
       <p className="max-w-sm text-sm text-ink-muted">{message}</p>

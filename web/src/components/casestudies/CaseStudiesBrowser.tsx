@@ -131,7 +131,7 @@ export function CaseStudiesBrowser({
           <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
             <fieldset className="flex flex-wrap items-center gap-2">
               <legend className="sr-only">Sort case studies</legend>
-              <span className="mr-1 text-xs font-medium uppercase tracking-wide text-ink-subtle">
+              <span className="eyebrow mr-1">
                 Sort
               </span>
               {sortOptions.map((opt) => (
@@ -145,7 +145,7 @@ export function CaseStudiesBrowser({
               ))}
             </fieldset>
             <p aria-live="polite" className="text-sm text-ink-muted">
-              {filtered.length} {filtered.length === 1 ? "story" : "stories"}
+              <span className="nums-tabular font-medium text-ink">{filtered.length}</span> {filtered.length === 1 ? "story" : "stories"}
             </p>
           </div>
         </div>
@@ -191,7 +191,7 @@ function FilterRow({
   return (
     <fieldset className="flex flex-wrap items-center gap-2">
       <legend className="sr-only">Filter by {legend.toLowerCase()}</legend>
-      <span className="mr-1 text-xs font-medium uppercase tracking-wide text-ink-subtle">
+      <span className="eyebrow mr-1">
         {legend}
       </span>
       <Pill selected={value === ALL} onClick={() => onChange(ALL)}>
@@ -225,10 +225,10 @@ function Pill({
       onClick={onClick}
       aria-pressed={selected}
       className={cn(
-        "rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+        "rounded-full border px-3.5 py-1.5 text-sm font-medium transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px",
         selected
-          ? "border-ink bg-ink text-paper"
-          : "border-line-strong bg-paper text-ink-muted hover:border-ink-subtle hover:text-ink",
+          ? "border-ink bg-ink text-paper shadow-sm"
+          : "border-line-strong bg-paper text-ink-muted hover:border-ink-subtle hover:bg-surface hover:text-ink",
       )}
     >
       {children}

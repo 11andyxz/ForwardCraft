@@ -18,22 +18,24 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="relative flex min-h-[70vh] items-center overflow-hidden bg-paper">
+    <div className="relative flex min-h-[78vh] items-center overflow-hidden bg-paper">
       <div className="pointer-events-none absolute inset-0 grid-lines" aria-hidden="true" />
       <div className="container-page relative">
-        <div className="mx-auto flex max-w-2xl flex-col items-center gap-6 py-20 text-center">
-          <span className="flex size-12 items-center justify-center rounded-lg border border-line bg-surface text-danger">
-            <AlertTriangle className="size-5" aria-hidden="true" />
+        <div className="mx-auto flex max-w-md flex-col items-center gap-6 rounded-2xl border border-line bg-surface/60 px-6 py-12 text-center shadow-md backdrop-blur-sm md:px-10 md:py-14">
+          <span
+            className="flex size-14 items-center justify-center rounded-xl border border-danger/20 bg-danger-soft text-danger shadow-sm"
+          >
+            <AlertTriangle className="size-6" aria-hidden="true" />
           </span>
-          <h1 className="text-2xl font-medium tracking-tight text-ink md:text-3xl">
+          <h1 className="text-3xl tracking-tight text-ink md:text-4xl">
             Something went wrong
           </h1>
-          <p className="max-w-md text-ink-muted">
+          <p className="max-w-sm text-base text-ink-muted">
             We hit an unexpected error while loading this page. Sorry about that — you can try again,
             or head back to the homepage.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-1">
             <Button onClick={() => reset()}>
               <RefreshCw className="size-4" aria-hidden="true" />
               Try again
@@ -45,7 +47,9 @@ export default function Error({
           </div>
 
           {error.digest ? (
-            <p className="pt-2 font-mono text-xs text-ink-subtle">Error reference: {error.digest}</p>
+            <p className="mt-1 inline-flex items-center rounded-md border border-line bg-paper px-3 py-1.5 font-mono nums-tabular text-xs text-ink-subtle shadow-sm">
+              Error reference: {error.digest}
+            </p>
           ) : null}
         </div>
       </div>

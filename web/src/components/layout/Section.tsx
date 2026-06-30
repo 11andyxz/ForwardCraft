@@ -19,7 +19,7 @@ interface SectionProps {
 const toneClass: Record<Tone, string> = {
   paper: "bg-paper text-ink",
   surface: "bg-surface text-ink",
-  dark: "bg-night text-ink-inverse",
+  dark: "relative overflow-hidden bg-night text-ink-inverse",
 };
 
 const sizeClass = {
@@ -38,13 +38,27 @@ export function Section({
   id,
   ariaLabel,
 }: SectionProps) {
+  const isDark = tone === "dark";
+
   return (
     <section
       id={id}
       aria-label={ariaLabel}
       className={cn(toneClass[tone], sizeClass[size], className)}
     >
-      {contained ? <Container>{children}</Container> : children}
+      {isDark ? (
+        <>
+          {/* Depth for dark bands: soft ambient glow + film grain, behind content. */}
+          <div className="ambient-accent grain pointer-events-none absolute inset-0 z-0" aria-hidden="true" />
+          <div className="relative z-10">
+            {contained ? <Container>{children}</Container> : children}
+          </div>
+        </>
+      ) : contained ? (
+        <Container>{children}</Container>
+      ) : (
+        children
+      )}
     </section>
   );
 }

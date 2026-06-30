@@ -44,7 +44,7 @@ export function Tabs({ tabs, children, className, variant = "underline", ariaLab
         aria-label={ariaLabel}
         className={cn(
           "flex gap-1 overflow-x-auto no-scrollbar",
-          variant === "underline" ? "border-b border-line" : "rounded-lg bg-surface p-1",
+          variant === "underline" ? "border-b border-line" : "rounded-lg border border-line bg-surface p-1",
         )}
       >
         {tabs.map((tab, i) => {
@@ -63,24 +63,24 @@ export function Tabs({ tabs, children, className, variant = "underline", ariaLab
               onClick={() => setActive(tab.id)}
               onKeyDown={(e) => onKeyDown(e, i)}
               className={cn(
-                "relative shrink-0 px-4 py-2.5 text-sm font-medium transition-colors",
+                "relative shrink-0 rounded-md px-4 py-2.5 text-sm font-medium transition-[color,background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:translate-y-px",
                 variant === "underline"
                   ? selected
                     ? "text-ink"
-                    : "text-ink-muted hover:text-ink"
+                    : "text-ink-muted hover:bg-surface hover:text-ink"
                   : selected
-                    ? "rounded-md bg-paper text-ink shadow-sm"
-                    : "rounded-md text-ink-muted hover:text-ink",
+                    ? "bg-paper text-ink shadow-sm"
+                    : "text-ink-muted hover:text-ink",
               )}
             >
               {tab.label}
               {variant === "underline" && selected ? (
                 reduce ? (
-                  <span className="absolute inset-x-0 -bottom-px h-0.5 bg-ink" />
+                  <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-accent" />
                 ) : (
                   <motion.span
                     layoutId={`${baseId}-indicator`}
-                    className="absolute inset-x-0 -bottom-px h-0.5 bg-ink"
+                    className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-accent"
                   />
                 )
               ) : null}

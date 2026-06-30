@@ -83,19 +83,21 @@ export function FileDropzone({
       />
 
       {file ? (
-        <div className="flex items-center justify-between gap-3 rounded-md border border-line-strong bg-paper px-3.5 py-3">
-          <span className="flex min-w-0 items-center gap-2.5">
-            <FileText className="size-5 shrink-0 text-ink-muted" />
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-line-strong bg-paper px-3.5 py-3 shadow-sm transition-[border-color,box-shadow] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-ink-subtle hover:shadow-md">
+          <span className="flex min-w-0 items-center gap-3">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-accent-soft text-accent">
+              <FileText className="size-[18px]" strokeWidth={1.75} />
+            </span>
             <span className="flex min-w-0 flex-col">
               <span className="truncate text-sm font-medium text-ink">{file.name}</span>
-              <span className="text-xs text-ink-subtle">{formatBytes(file.size)}</span>
+              <span className="font-mono text-xs text-ink-subtle nums-tabular">{formatBytes(file.size)}</span>
             </span>
           </span>
           <span className="flex shrink-0 items-center gap-1">
             <button
               type="button"
               onClick={() => inputRef.current?.click()}
-              className="rounded-md px-2 py-1 text-xs font-medium text-ink-muted hover:bg-surface hover:text-ink"
+              className="rounded-md px-2.5 py-1.5 text-xs font-medium text-ink-muted transition-[color,background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-surface hover:text-ink active:translate-y-px"
             >
               Replace
             </button>
@@ -103,7 +105,7 @@ export function FileDropzone({
               type="button"
               onClick={clearFile}
               aria-label="Remove file"
-              className="rounded-md p-1.5 text-ink-muted hover:bg-surface hover:text-ink"
+              className="rounded-md p-1.5 text-ink-muted transition-[color,background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-surface hover:text-ink active:scale-90"
             >
               <X className="size-4" />
             </button>
@@ -120,16 +122,27 @@ export function FileDropzone({
           onDragLeave={() => setDragging(false)}
           onDrop={onDrop}
           className={cn(
-            "flex w-full flex-col items-center justify-center gap-2 rounded-md border border-dashed px-4 py-7 text-center transition-colors",
-            dragging ? "border-accent bg-accent-soft" : "border-line-strong bg-surface hover:border-ink-subtle",
-            shownError && "border-danger",
+            "group/drop flex w-full flex-col items-center justify-center gap-2.5 rounded-lg border border-dashed px-4 py-8 text-center transition-[border-color,background-color,box-shadow,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.99]",
+            dragging
+              ? "border-accent bg-accent-soft shadow-accent"
+              : "border-line-strong bg-surface hover:border-ink-subtle hover:bg-surface-2/60 hover:shadow-sm",
+            shownError && "border-danger bg-danger-soft/30",
           )}
         >
-          <Upload className="size-5 text-ink-muted" />
+          <span
+            className={cn(
+              "flex size-11 items-center justify-center rounded-full transition-[background-color,color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
+              dragging
+                ? "bg-accent text-paper"
+                : "bg-surface-2 text-ink-muted group-hover/drop:-translate-y-0.5 group-hover/drop:bg-accent-soft group-hover/drop:text-accent",
+            )}
+          >
+            <Upload className="size-[18px]" strokeWidth={1.75} />
+          </span>
           <span className="text-sm text-ink">
             <span className="font-medium text-accent">Click to upload</span> or drag and drop
           </span>
-          <span className="text-xs text-ink-subtle">
+          <span className="font-mono text-2xs uppercase tracking-[0.1em] text-ink-subtle">
             {exts.join(", ").toUpperCase()} · up to {formatBytes(maxBytes)}
           </span>
         </button>

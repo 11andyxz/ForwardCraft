@@ -54,9 +54,9 @@ export function MobileMenu({ open, onClose, items }: MobileMenuProps) {
             <button
               onClick={onClose}
               aria-label="Close menu"
-              className="rounded-md p-2 text-ink hover:bg-surface"
+              className="-mr-2 rounded-md p-2 text-ink transition-[color,background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-surface active:scale-[0.94]"
             >
-              <X className="size-6" />
+              <X className="size-6" strokeWidth={1.75} />
             </button>
           </div>
 
@@ -70,7 +70,7 @@ export function MobileMenu({ open, onClose, items }: MobileMenuProps) {
                       <Link
                         href={item.href ?? "#"}
                         onClick={onClose}
-                        className="flex items-center py-4 text-lg font-medium text-ink"
+                        className="-mx-2 flex items-center rounded-md px-2 py-4 text-lg font-medium text-ink transition-[color,background-color] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-accent active:bg-surface"
                       >
                         {item.label}
                       </Link>
@@ -82,11 +82,18 @@ export function MobileMenu({ open, onClose, items }: MobileMenuProps) {
                     <button
                       onClick={() => setExpanded(isOpen ? null : item.label)}
                       aria-expanded={isOpen}
-                      className="flex w-full items-center justify-between py-4 text-lg font-medium text-ink"
+                      className={cn(
+                        "-mx-2 flex w-full items-center justify-between rounded-md px-2 py-4 text-lg font-medium transition-[color,background-color] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:bg-surface",
+                        isOpen ? "text-accent" : "text-ink hover:text-accent",
+                      )}
                     >
                       {item.label}
                       <ChevronDown
-                        className={cn("size-5 text-ink-muted transition-transform", isOpen && "rotate-180")}
+                        className={cn(
+                          "size-5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                          isOpen ? "rotate-180 text-accent" : "text-ink-muted",
+                        )}
+                        strokeWidth={1.75}
                       />
                     </button>
                     <AnimatePresence initial={false}>
@@ -98,13 +105,13 @@ export function MobileMenu({ open, onClose, items }: MobileMenuProps) {
                           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                           className="overflow-hidden"
                         >
-                          <div className="flex flex-col gap-5 pb-5">
+                          <div className="ml-1 flex flex-col gap-5 border-l border-line pb-5 pl-3">
                             {item.groups.map((group) => (
                               <div key={group.heading ?? group.label}>
                                 {group.heading ? (
-                                  <p className="eyebrow mb-2">{group.heading}</p>
+                                  <p className="eyebrow mb-2.5">{group.heading}</p>
                                 ) : null}
-                                <ul className="flex flex-col">
+                                <ul className="flex flex-col gap-0.5">
                                   {group.leaves.map((leaf) => {
                                     const Icon = getIcon(leaf.icon);
                                     return (
@@ -112,9 +119,12 @@ export function MobileMenu({ open, onClose, items }: MobileMenuProps) {
                                         <Link
                                           href={leaf.href}
                                           onClick={onClose}
-                                          className="flex items-center gap-3 py-2.5 text-base text-ink-muted"
+                                          className="group -ml-2 flex items-center gap-3 rounded-md px-2 py-2.5 text-base text-ink-muted transition-[color,background-color] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-surface hover:text-ink active:translate-y-px"
                                         >
-                                          <Icon className="size-4 text-ink-subtle" />
+                                          <Icon
+                                            className="size-4 shrink-0 text-ink-subtle transition-colors duration-200 group-hover:text-accent"
+                                            strokeWidth={1.75}
+                                          />
                                           {leaf.label}
                                         </Link>
                                       </li>

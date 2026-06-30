@@ -71,8 +71,10 @@ export function Header() {
       <header
       ref={headerRef}
       className={cn(
-        "sticky top-0 z-50 w-full bg-paper/85 backdrop-blur-md transition-shadow",
-        scrolled || openMenu ? "border-b border-line shadow-sm" : "border-b border-transparent",
+        "sticky top-0 z-50 w-full backdrop-blur-xl backdrop-saturate-150 transition-[background-color,border-color,box-shadow] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+        scrolled || openMenu
+          ? "border-b border-line bg-paper/80 shadow-sm"
+          : "border-b border-transparent bg-paper/60",
       )}
       onMouseLeave={scheduleClose}
       onMouseEnter={cancelClose}
@@ -91,9 +93,10 @@ export function Header() {
                   <li key={item.label}>
                     <Link
                       href={item.href ?? "#"}
-                      className="inline-flex h-16 items-center px-3.5 text-sm font-medium text-ink-muted hover:text-ink"
+                      className="group/nav relative inline-flex h-16 items-center px-3.5 text-sm font-medium text-ink-muted transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-ink"
                     >
                       {item.label}
+                      <span className="pointer-events-none absolute inset-x-3.5 bottom-[1.125rem] h-px origin-left scale-x-0 bg-accent transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/nav:scale-x-100" />
                     </Link>
                   </li>
                 );
@@ -109,12 +112,23 @@ export function Header() {
                     }}
                     onClick={() => setOpenMenu(isOpen ? null : item.label)}
                     className={cn(
-                      "inline-flex h-16 items-center gap-1 px-3.5 text-sm font-medium transition-colors",
+                      "group/nav relative inline-flex h-16 items-center gap-1 px-3.5 text-sm font-medium transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)]",
                       isOpen ? "text-ink" : "text-ink-muted hover:text-ink",
                     )}
                   >
                     {item.label}
-                    <ChevronDown className={cn("size-3.5 transition-transform", isOpen && "rotate-180")} />
+                    <ChevronDown
+                      className={cn(
+                        "size-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                        isOpen && "rotate-180",
+                      )}
+                    />
+                    <span
+                      className={cn(
+                        "pointer-events-none absolute inset-x-3.5 bottom-[1.125rem] h-px origin-left bg-accent transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                        isOpen ? "scale-x-100" : "scale-x-0 group-hover/nav:scale-x-100",
+                      )}
+                    />
                   </button>
                 </li>
               );
@@ -126,7 +140,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <Link
             href="/ai-training/expert-network"
-            className="hidden text-sm font-medium text-ink-muted hover:text-ink xl:inline-flex"
+            className="hidden text-sm font-medium text-ink-muted transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-ink xl:inline-flex"
           >
             Expert network
           </Link>
@@ -134,7 +148,7 @@ export function Header() {
             Book a demo
           </Button>
           <button
-            className="rounded-md p-2 text-ink hover:bg-surface lg:hidden"
+            className="rounded-md p-2 text-ink transition-[background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-surface active:translate-y-px lg:hidden"
             aria-label="Open menu"
             onClick={() => setMobileOpen(true)}
           >
@@ -152,7 +166,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? { opacity: 0 } : { opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-x-0 top-16 hidden border-b border-line bg-paper shadow-lg lg:block"
+            className="absolute inset-x-0 top-16 hidden border-b border-line bg-paper/95 shadow-lg backdrop-blur-xl backdrop-saturate-150 lg:block"
             onMouseEnter={cancelClose}
             onMouseLeave={scheduleClose}
           >

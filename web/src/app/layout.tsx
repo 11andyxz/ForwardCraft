@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 import { Header } from "@/components/layout/Header";
@@ -8,6 +8,13 @@ import { CookieConsent } from "@/components/ui/CookieConsent";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
+// Editorial serif for display headings (h1/h2). Variable font — optical
+// sizing is driven by `font-optical-sizing: auto` in globals.css.
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -41,7 +48,10 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
+    >
       <body className="flex min-h-full flex-col bg-paper">
         <a
           href="#main"

@@ -13,7 +13,10 @@ function ColumnLinks({ leaves }: { leaves: { label: string; href: string }[] }) 
     <ul className="flex flex-col gap-2.5">
       {leaves.map((leaf) => (
         <li key={leaf.href}>
-          <Link href={leaf.href} className="text-sm text-ink-inverse-muted transition-colors hover:text-ink-inverse">
+          <Link
+            href={leaf.href}
+            className="inline-flex text-sm text-ink-inverse-muted transition-[color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:translate-x-0.5 hover:text-ink-inverse"
+          >
             {leaf.label}
           </Link>
         </li>
@@ -26,8 +29,10 @@ export function Footer() {
   const year = 2026;
 
   return (
-    <footer className="bg-night text-ink-inverse">
-      <div className="container-page py-16 md:py-20">
+    <footer className="relative overflow-hidden bg-night text-ink-inverse">
+      {/* Ambient depth — soft accent glow + film grain, behind real content */}
+      <div aria-hidden className="ambient-accent grain pointer-events-none absolute inset-0 z-0" />
+      <div className="container-page relative z-10 py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.1fr_2fr]">
           {/* Brand + newsletter */}
           <div className="flex flex-col gap-6">
@@ -50,7 +55,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex size-9 items-center justify-center rounded-md border border-line-inverse font-mono text-xs font-medium text-ink-inverse-muted transition-colors hover:border-ink-inverse-muted hover:text-ink-inverse"
+                  className="flex size-9 items-center justify-center rounded-lg border border-line-inverse bg-night-2/40 font-mono text-xs font-medium text-ink-inverse-muted transition-[color,background-color,border-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-0.5 hover:border-ink-inverse-muted hover:bg-night-3 hover:text-ink-inverse active:translate-y-0"
                 >
                   {short}
                 </a>
@@ -63,7 +68,7 @@ export function Footer() {
             <div className="hidden grid-cols-2 gap-8 md:grid lg:grid-cols-5">
               {footerColumns.map((col) => (
                 <div key={col.heading} className="flex flex-col gap-3">
-                  <p className="text-2xs font-medium uppercase tracking-wider text-ink-inverse">{col.heading}</p>
+                  <p className="font-mono text-2xs font-medium uppercase tracking-[0.16em] text-ink-inverse">{col.heading}</p>
                   <ColumnLinks leaves={col.leaves} />
                 </div>
               ))}
@@ -87,25 +92,36 @@ export function Footer() {
             {compliance.map((c) => (
               <span
                 key={c}
-                className="rounded-md border border-line-inverse px-2.5 py-1 text-2xs font-medium tracking-wide text-ink-inverse-muted"
+                className="rounded-md border border-line-inverse bg-night-2/40 px-2.5 py-1 font-mono text-2xs font-medium tracking-[0.08em] text-ink-inverse-muted transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:border-ink-inverse-muted hover:text-ink-inverse"
               >
                 {c}
               </span>
             ))}
           </div>
           <div className="flex flex-col gap-4 text-sm text-ink-inverse-muted sm:flex-row sm:items-center sm:justify-between">
-            <p>
+            <p className="nums-tabular">
               © {year} AndyXiongZheng LLC. ForwardCraft is a business brand of AndyXiongZheng LLC.
             </p>
             <nav className="flex flex-wrap items-center gap-x-5 gap-y-2" aria-label="Legal">
-              <Link href="/privacy" className="hover:text-ink-inverse">
+              <Link
+                href="/privacy"
+                className="transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-ink-inverse"
+              >
                 Privacy center
               </Link>
-              <Link href="/terms" className="hover:text-ink-inverse">
+              <Link
+                href="/terms"
+                className="transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-ink-inverse"
+              >
                 Terms
               </Link>
-              <CookiePrefsButton className="hover:text-ink-inverse">Cookie preferences</CookiePrefsButton>
-              <Link href="/about" className="hover:text-ink-inverse">
+              <CookiePrefsButton className="transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-ink-inverse">
+                Cookie preferences
+              </CookiePrefsButton>
+              <Link
+                href="/about"
+                className="transition-colors duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-ink-inverse"
+              >
                 Modern slavery statement
               </Link>
             </nav>
