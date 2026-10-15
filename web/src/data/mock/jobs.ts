@@ -123,7 +123,7 @@ const dataScientist: Job = {
   location: "New York, NY",
   type: "Full-time",
   remote: false,
-  postedAt: "2026-10-14",
+  postedAt: "2026-09-14",
   summary:
     "Partner with product teams to turn data into measurable business outcomes — through analyses, models, experiments, and clear data-driven storytelling.",
   about: [
