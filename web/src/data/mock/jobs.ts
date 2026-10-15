@@ -114,7 +114,45 @@ const technicalProductAnalyst: Job = {
   ],
 };
 
-export const jobs: Job[] = [technicalProductAnalyst, ...seededJobs];
+/** Fully-specified role (real content, not the shared template above). */
+const dataScientist: Job = {
+  id: "data-scientist",
+  slug: "data-scientist",
+  title: "Data Scientist",
+  department: "Data Science",
+  location: "New York, NY",
+  type: "Full-time",
+  remote: false,
+  postedAt: "2026-10-14",
+  summary:
+    "Partner with product teams to turn data into measurable business outcomes — through analyses, models, experiments, and clear data-driven storytelling.",
+  about: [
+    "The Data Scientist works with product teams in our New York office to create analyses and build models that drive measurable business outcomes. You'll help design and run experiments — including A/B tests and causal inference studies — and build the analytical datasets and pipelines that keep that work trustworthy.",
+    "This is a hands-on role spanning experimentation, statistical modeling, data engineering for analytics, and communication. You'll partner with senior team members on analytical deep dives into complex business problems, turn findings into clear recommendations for technical and non-technical audiences, and use generative AI tools responsibly — with human oversight — to deliver business-ready work.",
+  ],
+  responsibilities: [
+    "Collaborate with product teams to create analyses and build models that drive measurable business outcomes.",
+    "Support the design and execution of experiments, including A/B tests and causal inference methods.",
+    "Build and maintain analytical datasets and pipelines that ensure data integrity and power your analyses and models.",
+    "Distill complex analyses into clear, actionable insights through data-driven storytelling for technical and non-technical audiences.",
+    "Partner with senior team members on analytical deep dives to diagnose and address complex business problems.",
+  ],
+  requirements: [
+    "Coursework or project experience in statistical modeling, data analysis, or a related quantitative field (e.g., mathematics, economics, physics, computer science).",
+    "Familiarity with SQL for data analysis and Python for programming or modeling.",
+    "Demonstrated interest in experimentation (A/B testing), causal inference, or machine learning through coursework or projects.",
+    "Currently pursuing a BA/BS or graduate degree in a quantitative discipline (e.g., Math, Statistics, Physics, Computer Science, Economics) or equivalent experience.",
+    "Utilizes generative AI responsibly, maintaining human oversight to deliver business-ready outputs and drive measurable improvements in workflow efficiency, cost, and quality.",
+  ],
+  niceToHave: [
+    "Experience with Python data and modeling libraries such as pandas, NumPy, scikit-learn, or statsmodels.",
+    "Exposure to data pipeline or transformation tools (e.g., dbt, Airflow) or a cloud data warehouse.",
+    "Experience presenting results through dashboards or visualization tools (e.g., Tableau, Looker, matplotlib).",
+    "Internship, research, or project experience applying data science to product or business problems.",
+  ],
+};
+
+export const jobs: Job[] = [dataScientist, technicalProductAnalyst, ...seededJobs];
 
 export const departments = Array.from(new Set(jobs.map((j) => j.department))).sort();
 export const jobLocations = Array.from(new Set(jobs.map((j) => j.location))).sort();
