@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { Input, Select, Textarea } from "@/components/ui/Field";
 import { Button } from "@/components/ui/Button";
@@ -53,6 +53,7 @@ export function JobApplicationForm({ job }: { job: JobRef }) {
   const [status, setStatus] = useState<Status>("idle");
   const [serverError, setServerError] = useState<string | null>(null);
   const [success, setSuccess] = useState<{ jobTitle: string; email: string } | null>(null);
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   function set<K extends keyof Fields>(key: K, value: string) {
     setFields((f) => ({ ...f, [key]: value }));
@@ -105,6 +106,7 @@ export function JobApplicationForm({ job }: { job: JobRef }) {
       (Object.keys(fields) as (keyof Fields)[]).forEach((k) => body.set(k, fields[k]));
       if (resume) body.set("resume", resume);
       if (coverFile) body.set("coverLetterFile", coverFile);
+      body.set("hp_field", honeypotRef.current?.value ?? "");
 
       const res = await fetch("/api/applications", { method: "POST", body });
       const data = await res.json().catch(() => ({}));
@@ -116,6 +118,11 @@ export function JobApplicationForm({ job }: { job: JobRef }) {
       if (res.status === 400 && data.errors) {
         setErrors(data.errors as Errors);
         setStatus("idle");
+        return;
+      }
+      if (res.status === 413) {
+        setServerError("Your files are too large to upload. Please use smaller files and try again.");
+        setStatus("error");
         return;
       }
       setServerError(data.error || "Something went wrong. Please try again.");
@@ -164,6 +171,11 @@ export function JobApplicationForm({ job }: { job: JobRef }) {
 
   return (
     <form onSubmit={onSubmit} noValidate className="mx-auto flex max-w-2xl flex-col gap-5">
+      {/* Spam trap: hidden from people and assistive tech; bots that fill every field get caught. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="hp_field">Leave this field empty</label>
+        <input ref={honeypotRef} id="hp_field" name="hp_field" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
+      </div>
       {errors.form ? (
         <p className="rounded-lg border border-danger/30 bg-danger-soft px-4 py-3 text-sm text-danger shadow-sm" role="alert">
           {errors.form}

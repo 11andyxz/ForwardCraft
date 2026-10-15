@@ -3,8 +3,10 @@
  * the client form and the server route so validation rules stay in sync.
  */
 
-export const MAX_RESUME_BYTES = 5 * 1024 * 1024; // 5 MB
-export const MAX_COVER_BYTES = 5 * 1024 * 1024; // 5 MB
+// Vercel Functions reject request bodies over 4.5 MB, so both files together
+// (plus the text fields) must stay below that.
+export const MAX_RESUME_BYTES = 3 * 1024 * 1024; // 3 MB
+export const MAX_COVER_BYTES = 1 * 1024 * 1024; // 1 MB
 
 export const RESUME_EXTENSIONS = [".pdf", ".doc", ".docx"] as const;
 export const RESUME_MIME = [
@@ -31,7 +33,11 @@ export const REFERRAL_OPTIONS = [
   { value: "other", label: "Other" },
 ];
 
-export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// One bare address (RFC 5322 dot-atom local part, hostname with an alphabetic or
+// punycode TLD). No , ; < > " ( ) : or whitespace, so it can never be split into
+// extra recipients. Shared with the mailer, which uses it for To / Reply-To.
+export const EMAIL_RE =
+  /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@(?:[A-Za-z0-9-]+\.)+(?:[A-Za-z]{2,}|xn--[A-Za-z0-9-]+)$/;
 
 export function isValidEmail(value: string): boolean {
   return EMAIL_RE.test(value.trim());

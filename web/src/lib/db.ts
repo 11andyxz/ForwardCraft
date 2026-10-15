@@ -111,3 +111,18 @@ export async function insertApplication(rec: ApplicationRecord): Promise<void> {
     ],
   );
 }
+
+/** Applications stored since `since`: in total, and from one address for one job. */
+export async function countApplicationsSince(
+  since: Date,
+  email: string,
+  jobSlug: string,
+): Promise<{ total: number; fromEmail: number }> {
+  const pool = getPool();
+  const [rows] = await pool.query<mysql.RowDataPacket[]>(
+    `SELECT COUNT(*) AS total, COALESCE(SUM(email = ? AND job_slug = ?), 0) AS fromEmail
+       FROM applications WHERE submitted_at >= ?`,
+    [email, jobSlug, since],
+  );
+  return { total: Number(rows[0]?.total ?? 0), fromEmail: Number(rows[0]?.fromEmail ?? 0) };
+}

@@ -72,9 +72,13 @@ export function Button(props: ButtonAsLink | ButtonAsButton) {
     );
   }
 
-  const { ...rest } = props as ButtonAsButton;
+  // Strip our own props so the caller's `className` can't replace `classes` and
+  // variant/size/withArrow don't leak onto the DOM element.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { variant: _v, size: _s, withArrow: _w, className: _c, children: _ch, ...rest } =
+    props as ButtonAsButton;
   return (
-    <button className={classes} {...rest}>
+    <button {...rest} className={classes}>
       {children}
       {withArrow ? (
         <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-0.5" />
