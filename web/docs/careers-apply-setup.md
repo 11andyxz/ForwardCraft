@@ -91,8 +91,14 @@ which live only in environment variables — they are never committed.
   100 application emails per 24 h; at most one auto-reply per address per role
   per 24 h (counts come from the `applications` table, so they need the
   archive). Over the cap, applications are still archived, just not emailed.
-  For stronger protection, add a Vercel WAF rate-limit rule on
-  `POST /api/applications`.
+- Bot protection (both free on the Hobby plan):
+  - **Vercel BotID (Basic)** — `src/instrumentation-client.ts` runs an
+    invisible challenge on the page and the route calls `checkBotId()`, so
+    requests that don't come from the site's own form (curl, scripts) get a
+    403. Always passes in local development.
+  - **Vercel WAF rate limit** — custom firewall rule "Rate limit applications":
+    `POST /api/applications`, 5 requests per IP per 10 minutes, then 429.
+    Managed in Vercel → project → Firewall (Hobby allows one rate-limit rule).
 - The hiring-inbox email has a 25 s deadline and SMTP timeouts, so a stalled
   Gmail connection can't hold the request past `maxDuration` (60 s).
 - Uploads are capped at 3 MB (resume) + 1 MB (cover letter) because Vercel

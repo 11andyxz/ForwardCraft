@@ -125,6 +125,11 @@ export function JobApplicationForm({ job }: { job: JobRef }) {
         setStatus("error");
         return;
       }
+      if (res.status === 429) {
+        setServerError("Too many submissions from your network. Please wait a few minutes and try again.");
+        setStatus("error");
+        return;
+      }
       setServerError(data.error || "Something went wrong. Please try again.");
       setStatus("error");
     } catch {

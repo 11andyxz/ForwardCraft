@@ -1,4 +1,5 @@
 import { NextResponse, after } from "next/server";
+import { checkBotId } from "botid/server";
 import { put } from "@vercel/blob";
 import { randomUUID } from "node:crypto";
 import {
@@ -65,6 +66,16 @@ function fileOf(form: FormData, key: string): File | null {
 }
 
 export async function POST(request: Request) {
+  // Vercel BotID: requests that didn't come from our page (scripts, curl) fail
+  // the challenge. Always passes in local development.
+  const verification = await checkBotId();
+  if (verification.isBot) {
+    return NextResponse.json(
+      { ok: false, error: "We couldn't verify your browser. Please refresh the page and try again." },
+      { status: 403 },
+    );
+  }
+
   let form: FormData;
   try {
     form = await request.formData();
