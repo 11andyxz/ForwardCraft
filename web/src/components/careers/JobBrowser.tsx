@@ -44,7 +44,8 @@ export function JobBrowser({ jobs, departments, locations }: JobBrowserProps) {
 
     result.sort((a, b) => {
       if (sort === "az") return a.title.localeCompare(b.title);
-      // Newest first by postedAt.
+      // Year-round roles stay on top, then newest first by postedAt.
+      if (!!a.evergreen !== !!b.evergreen) return a.evergreen ? -1 : 1;
       return b.postedAt.localeCompare(a.postedAt);
     });
 

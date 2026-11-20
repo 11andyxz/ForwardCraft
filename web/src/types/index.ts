@@ -216,6 +216,15 @@ export interface Job {
   deliverables?: string[];
   compensation?: string;
   benefits?: string[];
+  /** Always-open role (e.g. the year-round internship): shows "Open year-round" instead of a posted date. */
+  evergreen?: boolean;
+  /** When people can start, e.g. "Rolling — the first Monday of every month". */
+  startNote?: string;
+  /**
+   * Path of this role's application page on the talent/onboarding app (forwardcraft-tracker).
+   * Used when NEXT_PUBLIC_TALENT_SITE_URL is set; otherwise the on-page form is used.
+   */
+  talentApplyPath?: string;
 }
 
 export interface Office {

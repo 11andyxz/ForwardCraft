@@ -114,6 +114,46 @@ const technicalProductAnalyst: Job = {
   ],
 };
 
+/**
+ * Year-round internship: always open, applications go to the talent/onboarding app.
+ * `postedAt` is the real date it was added (only used for sorting; the page shows "Open year-round").
+ * Keep the wording in sync with the role published in the talent admin (slug below).
+ */
+const yearRoundInternship: Job = {
+  id: "ai-software-engineering-intern",
+  slug: "ai-software-engineering-intern",
+  title: "AI & Software Engineering Intern",
+  department: "AI Solutions",
+  location: "Remote — United States",
+  type: "Internship",
+  remote: true,
+  postedAt: "2026-11-19",
+  evergreen: true,
+  startNote: "Rolling — new interns start the first Monday of every month",
+  talentApplyPath: "/careers/ai-software-engineering-intern/apply",
+  compensation: "Unpaid internship · 20+ hours a week",
+  summary:
+    "A year-round, remote internship for students and recent graduates who want real experience building AI and software for small and mid-sized businesses. You'll join a ForwardCraft project team, ship real work for real clients, and be mentored by our engineers.",
+  responsibilities: [
+    "Build features, integrations and AI workflows (LLM apps, automations, dashboards) for client projects.",
+    "Work in sprints: plan your tasks, post daily standups, and get every change code-reviewed by a mentor.",
+    "Test, document and demo what you build to your mentor and the client.",
+    "Learn the tools and practices of a professional delivery team: Git, pull requests, issue tracking, code review.",
+  ],
+  requirements: [
+    "Currently studying or recently graduated in computer science, data science, engineering or a related field.",
+    "Working knowledge of Python or JavaScript/TypeScript.",
+    "Able to commit at least 20 hours a week for at least 12 weeks.",
+    "Authorized to work in the United States (F-1 OPT and CPT welcome).",
+    "Clear written English and a habit of asking questions early.",
+  ],
+  niceToHave: [
+    "Projects using LLM APIs, RAG, or agent frameworks.",
+    "Experience with React/Next.js, SQL, or cloud platforms.",
+    "A portfolio, GitHub profile or class project you can walk us through.",
+  ],
+};
+
 /** Fully-specified role (real content, not the shared template above). */
 const dataScientist: Job = {
   id: "data-scientist",
@@ -152,7 +192,7 @@ const dataScientist: Job = {
   ],
 };
 
-export const jobs: Job[] = [dataScientist, technicalProductAnalyst, ...seededJobs];
+export const jobs: Job[] = [yearRoundInternship, dataScientist, technicalProductAnalyst, ...seededJobs];
 
 export const departments = Array.from(new Set(jobs.map((j) => j.department))).sort();
 export const jobLocations = Array.from(new Set(jobs.map((j) => j.location))).sort();

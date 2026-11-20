@@ -72,8 +72,14 @@ export default async function JobDetailPage({
     { label: "Work type", value: workType, icon: Laptop },
     { label: "Employment type", value: job.type, icon: Briefcase },
     { label: "Department", value: job.department, icon: Building2 },
-    { label: "Posted", value: formatDate(job.postedAt), icon: Clock },
+    job.evergreen ? { label: "Openings", value: "Open year-round", icon: Clock } : { label: "Posted", value: formatDate(job.postedAt), icon: Clock },
+    ...(job.startNote ? [{ label: "Start dates", value: job.startNote, icon: Clock }] : []),
   ];
+
+  // Roles handled by the talent/onboarding app apply there (when it's configured).
+  const talentSite = (process.env.NEXT_PUBLIC_TALENT_SITE_URL || "").replace(/\/+$/, "");
+  const externalApply = job.talentApplyPath && talentSite ? `${talentSite}${job.talentApplyPath}` : null;
+  const applyHref = externalApply ?? "#apply";
 
   return (
     <>
@@ -88,7 +94,7 @@ export default async function JobDetailPage({
         ]}
         actions={
           <>
-            <Button href="#apply" withArrow>
+            <Button href={applyHref} withArrow>
               Apply for this job
             </Button>
             <div className="flex flex-wrap items-center gap-2">
@@ -165,7 +171,7 @@ export default async function JobDetailPage({
             ) : null}
 
             <div className="pt-2">
-              <Button href="#apply" withArrow>
+              <Button href={applyHref} withArrow>
                 Apply for this job
               </Button>
             </div>
@@ -198,7 +204,7 @@ export default async function JobDetailPage({
                 })}
               </dl>
 
-              <Button href="#apply" className="w-full" withArrow>
+              <Button href={applyHref} className="w-full" withArrow>
                 Apply for this job
               </Button>
             </div>
@@ -220,7 +226,18 @@ export default async function JobDetailPage({
               Applying for <span className="font-medium text-ink">{job.title}</span> · {job.location}
             </p>
           </div>
-          <JobApplicationForm job={{ id: job.id, slug: job.slug, title: job.title }} />
+          {externalApply ? (
+            <div className="mx-auto flex max-w-2xl flex-col items-start gap-4">
+              <p className="text-base text-ink-muted">
+                Applications for this role go through our talent portal. It takes about 3 minutes, and you&apos;ll get a private link to follow your application.
+              </p>
+              <Button href={externalApply} withArrow>
+                Continue to application
+              </Button>
+            </div>
+          ) : (
+            <JobApplicationForm job={{ id: job.id, slug: job.slug, title: job.title }} />
+          )}
         </div>
       </Section>
 

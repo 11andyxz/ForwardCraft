@@ -18,6 +18,7 @@ export function JobCard({ job }: { job: Job }) {
           <Badge tone="neutral">{job.department}</Badge>
           {job.remote ? <Badge tone="accent">Remote</Badge> : null}
           <Badge tone="outline">{job.type}</Badge>
+          {job.evergreen ? <Badge tone="accent">Open year-round</Badge> : null}
         </div>
         <h3 className="text-lg font-medium text-ink transition-colors duration-300 group-hover:text-accent">{job.title}</h3>
         <p className="flex items-center gap-1.5 text-sm text-ink-muted">
