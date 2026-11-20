@@ -131,6 +131,11 @@ const yearRoundInternship: Job = {
   evergreen: true,
   startNote: "Rolling — new interns start the first Monday of every month",
   talentApplyPath: "/careers/ai-software-engineering-intern/apply",
+  about: [
+    "A year-round, remote internship for students and recent graduates who want real experience building AI and software for small and mid-sized businesses.",
+    "You'll join a ForwardCraft project team working on a live client project: real requirements, real code reviews and a real deadline. A mentor plans your work with you each sprint, reviews every change, and meets with you weekly.",
+    "New interns start on the first Monday of every month, and the internship runs for at least 12 weeks at 20 or more hours a week.",
+  ],
   compensation: "Unpaid internship · 20+ hours a week",
   summary:
     "A year-round, remote internship for students and recent graduates who want real experience building AI and software for small and mid-sized businesses. You'll join a ForwardCraft project team, ship real work for real clients, and be mentored by our engineers.",

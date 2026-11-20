@@ -94,7 +94,7 @@ export function CookieConsent() {
               <div className="flex flex-col gap-4 rounded-2xl border border-line-strong bg-paper/95 p-5 shadow-lg ring-1 ring-line backdrop-blur-sm md:flex-row md:items-center md:justify-between md:gap-8 md:p-6">
                 <p className="max-w-2xl text-sm leading-relaxed text-ink-muted">
                   We use cookies to run the site and understand how it&apos;s used. You can accept all,
-                  reject non-essential, or set preferences. (This is a mock banner — no cookies are set.)
+                  reject non-essential, or set preferences.
                 </p>
                 <div className="flex shrink-0 flex-wrap items-center gap-2">
                   <Button variant="ghost" size="sm" onClick={() => setModalOpen(true)}>
